@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QQ炫舞 游戏环境反诈专项治理 · 对齐会</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --primary: #6C5CE7;
+    --primary-light: #A29BFE;
+    --primary-dark: #5A4BD1;
+    --danger: #E74C3C;
+    --danger-light: #FDEDEC;
+    --warning: #F39C12;
+    --warning-light: #FEF9E7;
+    --success: #27AE60;
+    --success-light: #EAFAF1;
+    --info: #3498DB;
+    --info-light: #EBF5FB;
+    --bg: #F8F9FE;
+    --card: #FFFFFF;
+    --text: #2D3436;
+    --text-secondary: #636E72;
+    --border: #E8E8F0;
+    --shadow: 0 2px 16px rgba(108, 92, 231, 0.08);
+    --shadow-hover: 0 8px 32px rgba(108, 92, 231, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ===== Hero Header ===== */
+  .hero {
+    background: linear-gradient(135deg, #6C5CE7 0%, #a855f7 50%, #ec4899 100%);
+    padding: 48px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .hero-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.9);
+    font-size: 14px;
+  }
+  .hero-meta-item .icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  /* ===== Main Container ===== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 32px 60px;
+  }
+
+  /* ===== Section ===== */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ===== Card ===== */
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    transition: box-shadow 0.3s;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* ===== Fraud Pattern ===== */
+  .fraud-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: auto;
+    padding: 8px 0;
+  }
+  .fraud-step {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    position: relative;
+    padding: 0 8px;
+  }
+  .fraud-step-num {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--danger), #C0392B);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 auto 10px;
+    position: relative;
+    z-index: 2;
+  }
+  .fraud-step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--danger);
+    margin-bottom: 4px;
+  }
+  .fraud-step-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .fraud-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: calc(50% + 22px);
+    width: calc(100% - 44px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--danger), rgba(231,76,60,0.3));
+    z-index: 1;
+  }
+
+  /* ===== Key Points ===== */
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .key-point {
+    background: var(--danger-light);
+    border: 1px solid rgba(231,76,60,0.15);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .key-point .emoji { font-size: 28px; margin-bottom: 6px; }
+  .key-point .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 2px; }
+  .key-point .value { font-size: 15px; font-weight: 700; color: var(--danger); }
+
+  /* ===== Constraint Box ===== */
+  .constraint-box {
+    background: var(--warning-light);
+    border-left: 4px solid var(--warning);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .constraint-box h4 {
+    color: var(--warning);
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .constraint-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .constraint-box li {
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .constraint-box li::before {
+    content: '⚠';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-size: 12px;
+  }
+
+  /* ===== Goal Cards ===== */
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .goal-card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .goal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+  }
+  .goal-card.primary::before { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
+  .goal-card.danger::before { background: linear-gradient(90deg, var(--danger), #E74C3C); }
+  .goal-card.success::before { background: linear-gradient(90deg, var(--success), #2ECC71); }
+  .goal-card .goal-icon { font-size: 32px; margin-bottom: 8px; }
+  .goal-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .goal-card p { font-size: 13px; color: var(--text-secondary); }
+
+  /* ===== Three Phases ===== */
+  .phase {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+  }
+  .phase.phase-1::before { background: linear-gradient(180deg, #E74C3C, #C0392B); }
+  .phase.phase-2::before { background: linear-gradient(180deg, #F39C12, #E67E22); }
+  .phase.phase-3::before { background: linear-gradient(180deg, #3498DB, #2980B9); }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .phase-badge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .phase-1 .phase-badge { background: var(--danger); }
+  .phase-2 .phase-badge { background: var(--warning); }
+  .phase-3 .phase-badge { background: var(--info); }
+  .phase-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .phase-deadline {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: var(--bg);
+    padding: 4px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .task-list {
+    list-style: none;
+    padding: 0;
+  }
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    background: var(--bg);
+    transition: background 0.2s;
+  }
+  .task-item:hover { background: #F0EFFE; }
+  .task-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .phase-1 .task-num { background: var(--danger); }
+  .phase-2 .task-num { background: var(--warning); }
+  .phase-3 .task-num { background: var(--info); }
+  .task-content { flex: 1; }
+  .task-content .task-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .task-content .task-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .task-owner {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .owner-ops { background: #F3E8FF; color: #7C3AED; }
+  .owner-sec { background: #DBEAFE; color: #2563EB; }
+  .owner-dev { background: #D1FAE5; color: #059669; }
+  .owner-all { background: #FEF3C7; color: #D97706; }
+
+  /* ===== Division Table ===== */
+  .division-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .division-table th {
+    background: linear-gradient(135deg, #6C5CE7, #a855f7);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 16px;
+    text-align: left;
+  }
+  .division-table td {
+    font-size: 13px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .division-table tr:last-child td { border-bottom: none; }
+  .division-table tr:nth-child(even) td { background: #FAFAFE; }
+  .division-table .person-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 2px 2px;
+  }
+
+  /* ===== Timeline ===== */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary), var(--primary-light), #e8e8f0);
+  }
+  .tl-item {
+    position: relative;
+    padding-bottom: 24px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -24px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    background: #fff;
+  }
+  .tl-item.active .tl-dot {
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.2);
+  }
+  .tl-date {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .tl-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* ===== Risk Box ===== */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .risk-card {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid;
+  }
+  .risk-card.high {
+    background: var(--danger-light);
+    border-color: rgba(231,76,60,0.2);
+  }
+  .risk-card.medium {
+    background: var(--warning-light);
+    border-color: rgba(243,156,18,0.2);
+  }
+  .risk-card .risk-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .risk-card.high .risk-label { color: var(--danger); }
+  .risk-card.medium .risk-label { color: var(--warning); }
+  .risk-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .risk-card p { font-size: 12px; color: var(--text-secondary); }
+
+  /* ===== Decision Box ===== */
+  .decision-list {
+    list-style: none;
+    padding: 0;
+  }
+  .decision-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .decision-item:last-child { border-bottom: none; }
+  .decision-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .decision-text {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .decision-text small {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 26px; }
+    .container { padding: 24px 16px 40px; }
+    .fraud-flow { flex-direction: column; gap: 12px; }
+    .fraud-step:not(:last-child)::after { display: none; }
+    .phase-header { flex-wrap: wrap; }
+    .phase-deadline { margin-left: 0; }
+  }
+
+  /* ===== Evidence Gallery ===== */
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .evidence-card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.3s;
+  }
+  .evidence-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+  .evidence-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px 0;
+  }
+  .evidence-platform {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .platform-xiaohongshu { background: #FFECE5; color: #FF2442; }
+  .platform-tieba { background: #E8F4FD; color: #4A90D9; }
+  .platform-zhihu { background: #EAF3FF; color: #0066FF; }
+  .platform-douyin { background: #1a1a2e; color: #FE2C55; }
+  .platform-official { background: #E8F5E9; color: #2E7D32; }
+  .platform-game { background: #F3E8FF; color: #7C3AED; }
+  .evidence-source {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .evidence-date {
+    margin-left: auto;
+    font-size: 11px;
+    color: #aaa;
+  }
+  .evidence-body {
+    padding: 12px 16px 16px;
+  }
+  .evidence-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .evidence-quote {
+    font-size: 13px;
+    color: var(--text-secondary);
+    background: var(--bg);
+    border-left: 3px solid var(--primary-light);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+  .evidence-quote em {
+    color: var(--danger);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .evidence-stats {
+    display: flex;
+    gap: 16px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: #aaa;
+  }
+  .evidence-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--danger-light);
+    color: var(--danger);
+    font-weight: 600;
+    margin: 2px 2px 0 0;
+  }
+
+  /* ===== Fraud Types (防骗百科) ===== */
+  .fraud-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .fraud-type-card {
+    background: linear-gradient(135deg, #2D2D3F, #1a1a2e);
+    border-radius: 12px;
+    padding: 16px 18px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .fraud-type-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FF4757, #FF6B81);
+  }
+  .fraud-type-num {
+    display: inline-block;
+    background: rgba(255,71,87,0.2);
+    color: #FF4757;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  .fraud-type-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.95);
+  }
+
+  /* ===== Stats Summary ===== */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .stat-pill {
+    background: linear-gradient(135deg, var(--danger), #C0392B);
+    color: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-pill .stat-number {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-pill .stat-label {
+    font-size: 12px;
+    opacity: 0.85;
+  }
+
+  /* ===== Source Link ===== */
+  .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(108,92,231,0.08);
+    transition: background 0.2s;
+  }
+  .source-link:hover {
+    background: rgba(108,92,231,0.15);
+  }
+
+  /* Print */
+  @media print {
+    .hero { background: #6C5CE7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .card, .phase { box-shadow: none; border: 1px solid #ddd; }
+    .evidence-card { break-inside: avoid; }
+    .fraud-type-card { background: #333 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🛡️ 专项治理 · SPECIAL CAMPAIGN</div>
+    <h1>QQ炫舞 游戏环境反诈专项治理</h1>
+    <div class="subtitle">对齐目标 · 拆分事项 · 明确分工</div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="icon">📅</div>
+        <div>
+          <div style="font-weight:600">会议时间</div>
+          <div style="font-size:12px;opacity:0.8">4月17日（周四）11:00-12:00</div>
+        </div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="icon">📍</div>
+        <div>
+          <div style="font-weight:600">会议地点</div>
+          <div style="font-size:12px;opacity:0.8">科兴D栋 · 线下</div>
+        </div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="icon">🎯</div>
+        <div>
+          <div style="font-weight:600">目标节点</div>
+          <div style="font-size:12px;opacity:0.8">5月周年庆前完成首批治理</div>
+        </div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="icon">👥</div>
+        <div>
+          <div style="font-weight:600">参会人员</div>
+          <div style="font-size:12px;opacity:0.8">芙蓉 / 饺子 / 田心 / 小罗 / Mira / 翩翩 / 青鸟</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ===== 1. 背景 & 骗术分析 ===== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--danger-light);color:var(--danger);">🔍</div>
+      <h2 class="section-title">问题背景 & 骗术链路分析</h2>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--danger);">📌 典型骗术流程（已验证）</h3>
+      <div class="fraud-flow">
+        <div class="fraud-step">
+          <div class="fraud-step-num">1</div>
+          <div class="fraud-step-title">接触引诱</div>
+          <div class="fraud-step-desc">以"挂名片"或<br>"完成任务"为由<br>添加家族好友</div>
+        </div>
+        <div class="fraud-step">
+          <div class="fraud-step-num">2</div>
+          <div class="fraud-step-title">话术铺垫</div>
+          <div class="fraud-step-desc">谎称找代练<br>买了对戒<br>建立信任</div>
+        </div>
+        <div class="fraud-step">
+          <div class="fraud-step-num">3</div>
+          <div class="fraud-step-title">引导出游戏</div>
+          <div class="fraud-step-desc">引导加入<br>"对戒非卖群"<br>或外部网页/客服</div>
+        </div>
+        <div class="fraud-step">
+          <div class="fraud-step-num">4</div>
+          <div class="fraud-step-title">安装软件</div>
+          <div class="fraud-step-desc">引导下载<br><strong>"向日葵"</strong><br>远程桌面软件</div>
+        </div>
+        <div class="fraud-step">
+          <div class="fraud-step-num">5</div>
+          <div class="fraud-step-title">实施诈骗</div>
+          <div class="fraud-step-desc">远程操控账号<br>引导"赠送/淘宝下单"<br>刷单刷钱</div>
+        </div>
+      </div>
+
+      <div class="key-points">
+        <div class="key-point">
+          <div class="emoji">🤖</div>
+          <div class="label">骗子特征</div>
+          <div class="value">批量买号（200-500级）<br>疑似工作室操作</div>
+        </div>
+        <div class="key-point">
+          <div class="emoji">🎯</div>
+          <div class="label">目标群体</div>
+          <div class="value">回流玩家为主<br>不熟悉游戏、好友少、易骗</div>
+        </div>
+        <div class="key-point">
+          <div class="emoji">📢</div>
+          <div class="label">外网反响</div>
+          <div class="value">掌炫贴吧、小红书<br>大量玩家吐槽</div>
+        </div>
+        <div class="key-point">
+          <div class="emoji">⏰</div>
+          <div class="label">紧迫性</div>
+          <div class="value">5月周年庆前必须治理<br>保障回流体验</div>
+        </div>
+      </div>
+
+      <div class="constraint-box">
+        <h4>⚠️ 安全侧当前约束（来自 polarzhou 反馈）</h4>
+        <ul>
+          <li>游戏内检测到的行为比较正常，无法直接按恶意发言处罚</li>
+          <li>引导游戏外沟通的内容，安全侧检测不了（超出管辖范围）</li>
+          <li>多为一对一聊天，难以触发刷屏检测</li>
+          <li>关键词拦截会快速被黑产绕过（变种对抗是长期事项）</li>
+          <li>如拦截所有含联系方式的发言，会误伤正常社交聊天</li>
+          <li>聊天记录留存时间很短，往前回溯有限</li>
+          <li>QQ平台暂不提供诈骗标签数据，需推动合作</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 1.5 外网舆情实录 ===== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FFF3E0;color:#E65100;">📸</div>
+      <h2 class="section-title">外网舆情实录 · 玩家真实反馈</h2>
+    </div>
+
+    <!-- 舆情数据汇总 -->
+    <div class="card" style="margin-bottom:16px;">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">📊 舆情数据摘要</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">
+        以下数据基于掌炫贴吧（QQ炫舞社区）、小红书、百度贴吧、炫舞街心花园官方论坛、知乎、抖音等多平台搜索整理。<br>
+        搜索关键词：<span class="evidence-tag">骗子</span><span class="evidence-tag">诈骗</span><span class="evidence-tag">对戒</span><span class="evidence-tag">向日葵</span><span class="evidence-tag">远程</span><span class="evidence-tag">挂名片</span>
+      </p>
+      <div class="stats-row">
+        <div class="stat-pill">
+          <div class="stat-number">6+</div>
+          <div class="stat-label">涉及平台数</div>
+        </div>
+        <div class="stat-pill" style="background:linear-gradient(135deg, #E67E22, #D35400);">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">可检索相关帖/视频</div>
+        </div>
+        <div class="stat-pill" style="background:linear-gradient(135deg, #8E44AD, #6C3483);">
+          <div class="stat-number">38万</div>
+          <div class="stat-label">已知单笔最高损失(元)</div>
+        </div>
+        <div class="stat-pill" style="background:linear-gradient(135deg, #2C3E50, #34495E);">
+          <div class="stat-number">2024-至今</div>
+          <div class="stat-label">问题持续时间</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 截图素材展示 - 来自运营提供 -->
+    <div class="card" style="margin-bottom:16px;">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px;">🔴 运营实地收集（芙蓉提供 · 8份截图素材）</h3>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">以下内容直接摘录自运营人员在掌炫贴吧和小红书的实地调查截图</p>
+
+      <div class="evidence-grid">
+
+        <!-- 截图1: 小红书 筠伊 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-xiaohongshu">小红书</span>
+            <span class="evidence-source">@筠伊</span>
+            <span class="evidence-date">2025-05-11</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">骗子遍布，回流玩家首当其冲</div>
+            <div class="evidence-quote">
+              "这种骗子很多，<em>每次上线都能遇见四五个</em>" —— 评论@bie。<br><br>
+              "我最近好遇到一个这种的，胜在了我没用电脑下载不了那个<em>远程操控软件</em>…我这最近刚回归的" —— 评论@月^
+            </div>
+          </div>
+          <div class="evidence-stats">
+            <span>👁️ 355浏览</span>
+            <span>💬 5评论</span>
+            <span>👍 12赞</span>
+          </div>
+        </div>
+
+        <!-- 截图5: 小红书 是三妹呀 主帖 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-xiaohongshu">小红书</span>
+            <span class="evidence-source">@是三妹呀 · 社区卷卷侠</span>
+            <span class="evidence-date">2025-05-25</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">"团伙作案，肯定是骗钱的！"</div>
+            <div class="evidence-quote">
+              游戏内私聊截图曝光：骗子以"挂特效戒指结婚"为名搭讪<br>
+              <em>"小姐姐 我们游戏跨区结婚 可以吗"</em><br>
+              <em>"我们一起挂个特效戒指结婚 可以吗？？"</em>
+            </div>
+          </div>
+          <div class="evidence-stats">
+            <span>👁️ 389浏览</span>
+            <span>💬 12评论</span>
+            <span>👍 39赞</span>
+          </div>
+        </div>
+
+        <!-- 截图4: 小红书 是三妹呀 评论区 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-xiaohongshu">小红书</span>
+            <span class="evidence-source">@是三妹呀 评论区</span>
+            <span class="evidence-date">2025-05-26</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">多区骗子横行，评论区大量共鸣</div>
+            <div class="evidence-quote">
+              "全是一舞的问的，是这个区骗子多吗，有<em>两个私聊过我</em>" —— @也许是明天<br><br>
+              "就是骗钱的，我第一次不知道被<em>骗了三百</em>，说我的号冻结了" —— 楼主回复<br><br>
+              "我每次回复可以 你包对戒 <em>别让我点平台链接</em> 他就不回我了" —— @那只猫<br><br>
+              "什么戈亦的也私聊过我，原来是骗子，避雷了" —— @是璟
+            </div>
+          </div>
+          <div class="evidence-stats">
+            <span>💬 12评论</span>
+            <span>👍 39赞</span>
+            <span>⭐ 1收藏</span>
+          </div>
+        </div>
+
+        <!-- 截图8: 小红书 澍澍 详细被骗2000 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-xiaohongshu">小红书</span>
+            <span class="evidence-source">@澍澍lomdhXZO</span>
+            <span class="evidence-date">2025-09-18</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">"大家警戒！！！骗我2000块"</div>
+            <div class="evidence-quote">
+              "先帮我300块我自己买好的道具帮我抽到冷焰脸，<em>博取信任</em>，后面再抽到珍宝甄选、占卜、开箱子，<em>截图都是假的</em>，套路你充值qb买道具抽奖实则买道具赠送给他自己"<br><br>
+              "淘宝套路骗了<em>500QB</em>，游戏道具套路骗了<em>1500</em>"<br><br>
+              截图显示骗子号等级：<em>LV355~LV567</em>
+            </div>
+          </div>
+          <div class="evidence-stats">
+            <span>👁️ 440浏览</span>
+            <span>💬 7评论</span>
+            <span>👍 10赞</span>
+          </div>
+        </div>
+
+        <!-- 截图2: 掌炫贴吧搜索结果 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-tieba">掌炫贴吧</span>
+            <span class="evidence-source">搜索"骗" · 全部</span>
+            <span class="evidence-date">2025</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">搜索"骗"一刷一大把</div>
+            <div class="evidence-quote">
+              "<em>不是骗子就是挂 这游戏快倒闭了吗</em>" —— @囍EPgjqDArA (2025-08-22)<br><br>
+              "<em>为啥到处是骗子</em>" —— @敬妳一瓶酒 (2025-06-02) · 共9张截图<br><br>
+              "<em>组队太难了</em>，组队太坑了，都想白嫖，还怕被骗。没有一个人诚心的" —— @终于止 (2025-08-27)
+            </div>
+          </div>
+          <div class="evidence-stats">
+            <span>📄 多帖汇总</span>
+            <span>👍 4-11赞/帖</span>
+          </div>
+        </div>
+
+        <!-- 截图3: 掌炫贴吧搜索结果续 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-tieba">掌炫贴吧</span>
+            <span class="evidence-source">搜索"骗" · 续</span>
+            <span class="evidence-date">2025</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">大量被骗实锤 + 金额曝光</div>
+            <div class="evidence-quote">
+              "这是骗子，穿个小人衣服如下图，<em>骗了我2000</em>，大家警戒" —— 附骗子QQ号<br><br>
+              "上图就是Pian子的qq号和支付宝，<em>套路我2000块qb</em>买道具给他自己" —— @澍澍<br><br>
+              "<em>天会黑，人会变，3分情，7分骗</em> · 世界太假，人心太深，处处是演员" —— @汐宝(炫舞分享达人)
+            </div>
+          </div>
+          <div class="evidence-stats">
+            <span>📄 多帖汇总</span>
+            <span>👍 6-7赞/帖</span>
+          </div>
+        </div>
+
+        <!-- 截图7: 掌炫贴吧搜索结果三 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-tieba">掌炫贴吧</span>
+            <span class="evidence-source">搜索"骗" · 续</span>
+            <span class="evidence-date">2025</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">防骗指南帖+更多被骗经历</div>
+            <div class="evidence-quote">
+              "上图这个骗子到处骗人！回归的，不懂的，<em>多看一下百度炫舞贴吧，防骗指南多看看哦</em>可以避很多" (2025-09-23)<br><br>
+              "今天查了一下，原来真的有很多人被骗了。大家小心 <em>无事献殷勤，上来就送戒指的，就不是什么好人</em>" —— @筠伊 (2025-05-13)<br><br>
+              "大家注意了次人就是一个骗子已各种理由<em>骗钱也不多骗个五十</em>…加上联系方式之后，会跟你们说胃疼什么的再你们借点啥的" —— @Nbi-的男孩 (2025-09-27)
+            </div>
+          </div>
+          <div class="evidence-stats">
+            <span>📄 多帖汇总</span>
+            <span>👍 2-11赞/帖</span>
+          </div>
+        </div>
+
+        <!-- 截图6: 玩家自制防骗百科 -->
+        <div class="evidence-card" style="border-color: var(--danger); border-width: 2px;">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-game">玩家自制</span>
+            <span class="evidence-source">QQ炫舞防骗百科</span>
+            <span class="evidence-date">玩家总结</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title" style="color:var(--danger);">⚠️ 玩家自发总结的8大骗术（说明问题已严重到玩家自救）</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 玩家自制防骗百科详细内容 -->
+    <div class="card" style="margin-bottom:16px;">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px;color:var(--danger);">⚠️ 玩家自发整理的《QQ炫舞防骗百科》8大骗术</h3>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">以下内容直接来自玩家在社区自行制作的防骗提醒图（截图6），说明骗术问题已严重到玩家开始自救</p>
+      <div class="fraud-types-grid">
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #1</div>
+          <div class="fraud-type-title">大厅/房间内挂机时主动私信你挂婚处CP，然后让你找代练买戒指</div>
+        </div>
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #2</div>
+          <div class="fraud-type-title">结完婚叫你玩仙侠及没听过的游戏的游戏托儿，后期会各种方式让你充值游戏</div>
+        </div>
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #3</div>
+          <div class="fraud-type-title">结完婚没几天跟你哭惨各种借钱（大小数都有），谎称家里有事/父母住院等</div>
+        </div>
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #4</div>
+          <div class="fraud-type-title">结完婚谎称上号帮你搭配，以及让你消费各种抽奖池给你出极品图的（P图+盗图怪）</div>
+        </div>
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #5</div>
+          <div class="fraud-type-title">各种喇叭大厅内喊Q币折扣、几十块卡年紫钻、指定绝版奖池物品几十块的</div>
+        </div>
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #6</div>
+          <div class="fraud-type-title">买戒指及抽奖不走担保，让你走淘宝各种扫码登录软件的（木马病毒）</div>
+        </div>
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #7</div>
+          <div class="fraud-type-title">CP或家族不久对方以各种理由跟你借钱的（大小数目都有）</div>
+        </div>
+        <div class="fraud-type-card">
+          <div class="fraud-type-num">骗术 #8</div>
+          <div class="fraud-type-title">让你加红包群及各种挣钱路子刷单让你投入、以及有偿解封WX的</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:10px 14px;background:var(--danger-light);border-radius:8px;text-align:center;">
+        <span style="font-size:14px;font-weight:700;color:var(--danger);">🚨 玩家原文警告：不要贪小便宜 · 天上不会掉馅饼！！！！！</span>
+      </div>
+    </div>
+
+    <!-- 网络搜集的外部案例 -->
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px;">🌐 全网检索补充案例（贴吧 / 知乎 / 抖音 / 官方论坛 / 新闻）</h3>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">通过搜索引擎检索"QQ炫舞 骗子 对戒 向日葵 远程"等关键词，以下为典型案例</p>
+
+      <div class="evidence-grid">
+
+        <!-- 百度贴吧 最新 2026年4月 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-tieba">百度贴吧</span>
+            <span class="evidence-source">qq炫舞吧</span>
+            <span class="evidence-date">2026-04-09</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">"送对戒需要远程电脑吗？不需要，是骗子套路！"</div>
+            <div class="evidence-quote">
+              玩家询问送对戒是否需要远程电脑，<em>多人回复确认是骗子</em>。帖子发布仅一周前，说明骗术至今仍在活跃。
+            </div>
+            <div style="margin-top:6px;"><a class="source-link" href="https://tieba.baidu.com/p/9869061981" target="_blank">🔗 查看原帖</a></div>
+          </div>
+        </div>
+
+        <!-- 百度贴吧 2026年3月 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-tieba">百度贴吧</span>
+            <span class="evidence-source">qq炫舞吧</span>
+            <span class="evidence-date">2026-03-29</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">"跨区送戒指要远程？是骗子，千万别信！"</div>
+            <div class="evidence-quote">
+              "刚回归，一直在大厅挂机，现在这个是什么新骗局吗"<br>
+              回复确认：<em>"骗子"</em>。问题持续发酵中。
+            </div>
+            <div style="margin-top:6px;"><a class="source-link" href="https://tieba.baidu.com/p/9016538188" target="_blank">🔗 查看原帖</a></div>
+          </div>
+        </div>
+
+        <!-- 百度贴吧 回归警惕 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-tieba">百度贴吧</span>
+            <span class="evidence-source">qq炫舞吧</span>
+            <span class="evidence-date">2026-04-12</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">"炫舞回归警惕新骗局：专骗回归玩家套路深"</div>
+            <div class="evidence-quote">
+              "我是好久不上网的人了…一打开电脑就玩炫舞"<br>
+              <em>代练诱导下载远程操控软件</em>，利用淘宝下订单及<em>人脸付款诈骗</em>
+            </div>
+            <div style="margin-top:6px;"><a class="source-link" href="https://tieba.baidu.com/p/8934683389" target="_blank">🔗 查看原帖</a></div>
+          </div>
+        </div>
+
+        <!-- 官方论坛案例 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-official">炫舞街心花园</span>
+            <span class="evidence-source">官方论坛 · @Vtaeat</span>
+            <span class="evidence-date">2024-10-16</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">"【聘妻聘夫挂名片戒指】避雷防骗！！！"</div>
+            <div class="evidence-quote">
+              回归半月即遭骗。完整流程：搭讪→加QQ→下载<em>向日葵远程</em>→骗子远程操控→打开京东淘宝扫码→索要银行卡号<br><br>
+              及时止损后发现：<em>工作文件被全部删除</em>，远程控制软件仍未关闭<br><br>
+              评论区：<em>"前段时间就有这样的骗子，今天遇到和你这个一模一样的人，名字、衣服都一样"</em>
+            </div>
+            <div style="margin-top:6px;"><a class="source-link" href="https://bbs.x5.qq.com/forum.php?mod=viewthread&tid=293343" target="_blank">🔗 查看原帖 · 927浏览</a></div>
+          </div>
+        </div>
+
+        <!-- 重大案例：38万 -->
+        <div class="evidence-card" style="border-color:var(--danger);border-width:2px;">
+          <div class="evidence-card-header">
+            <span class="evidence-platform" style="background:#FFCDD2;color:#B71C1C;">⚖️ 司法案例</span>
+            <span class="evidence-source">合肥市检察院 · 搜狐新闻</span>
+            <span class="evidence-date">2025-10</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title" style="color:var(--danger);font-size:15px;">炫舞好友设下"装备"陷阱 · 女子被骗38万元</div>
+            <div class="evidence-quote">
+              吴某某以"可以白嫖游戏装备"的谎言获取被害人信任后，前后共骗取<em>38万元</em>。<br>
+              <strong>最终因诈骗罪获刑六年。</strong><br><br>
+              ⚠️ 这不再只是小额骗术，已上升到刑事犯罪层面。
+            </div>
+            <div style="margin-top:6px;">
+              <a class="source-link" href="https://www.sohu.com/a/943142234_121117080" target="_blank">🔗 搜狐新闻报道</a>
+              <a class="source-link" href="http://www.ahcaw.com/ahcaw/content/2025-10/23/content_9275255.htm" target="_blank">🔗 安徽长安网</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 官方已有处罚行动 -->
+        <div class="evidence-card">
+          <div class="evidence-card-header">
+            <span class="evidence-platform platform-official">QQ炫舞2官网</span>
+            <span class="evidence-source">官方公告</span>
+            <span class="evidence-date">2025-08-29</span>
+          </div>
+          <div class="evidence-body">
+            <div class="evidence-title">官方已有先例：打击外挂刷取对戒处罚公告</div>
+            <div class="evidence-quote">
+              "近期我们发现游戏内部分用户获得大量由外挂恶意刷取的 [摇滚心韵·对戒]…我们将针对恶意开挂刷取账号实行封号"<br><br>
+              <strong>说明：官方已有对"对戒"相关违规的处罚先例，本次专项可以参考此公告的处罚口径和公示模板。</strong>
+            </div>
+            <div style="margin-top:6px;"><a class="source-link" href="https://5s.qq.com/webplat/info/news_version3/1434/36837/36840/36848/m21391/202508/974738.shtml" target="_blank">🔗 官网公告</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 全网舆情平台汇总 -->
+      <div style="margin-top:16px;padding:16px;background:var(--bg);border-radius:12px;">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">📡 全网检索覆盖平台一览</h4>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="evidence-platform platform-tieba" style="font-size:12px;padding:4px 12px;">百度贴吧 · qq炫舞吧</span>
+          <span class="evidence-platform platform-xiaohongshu" style="font-size:12px;padding:4px 12px;">小红书 · QQ炫舞话题</span>
+          <span class="evidence-platform platform-tieba" style="font-size:12px;padding:4px 12px;">掌炫贴吧(QQ炫舞社区APP)</span>
+          <span class="evidence-platform platform-official" style="font-size:12px;padding:4px 12px;">炫舞街心花园 · 官方论坛</span>
+          <span class="evidence-platform platform-douyin" style="font-size:12px;padding:4px 12px;">抖音 · 炫舞骗局话题</span>
+          <span class="evidence-platform platform-zhihu" style="font-size:12px;padding:4px 12px;">知乎 · 炫舞诈骗经历</span>
+          <span class="evidence-platform" style="font-size:12px;padding:4px 12px;background:#FFCDD2;color:#B71C1C;">司法新闻 · 诈骗判刑案例</span>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;">
+          💡 <strong>结论：</strong>诈骗问题从2024年初至今持续恶化，已从游戏内社交骗术升级到远程操控诈骗和刑事犯罪级别。玩家自发制作防骗指南、在各平台大量吐槽，已严重影响游戏口碑和新/回流用户体验。<strong>5月周年庆前必须给出治理动作。</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. 核心目标 ===== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#F3E8FF;color:#7C3AED;">🎯</div>
+      <h2 class="section-title">本次专项核心目标</h2>
+    </div>
+
+    <div class="goals-grid">
+      <div class="goal-card primary">
+        <div class="goal-icon">🔨</div>
+        <h4>短期打击 · 5月前</h4>
+        <p>收集+核实一批诈骗账号，集中封号处理；<br>在游戏内和社区进行<strong>封号公示</strong>，让玩家感知到我们在肃清游戏环境上做的实际动作。</p>
+      </div>
+      <div class="goal-card danger">
+        <div class="goal-icon">🛡️</div>
+        <h4>防范预警 · 同步进行</h4>
+        <p>游戏内聊天界面增加<strong>谨防诈骗提醒标识</strong>；<br>发布<strong>官方防骗指南</strong>，教育玩家识别常见骗术。</p>
+      </div>
+      <div class="goal-card success">
+        <div class="goal-icon">🤝</div>
+        <h4>长效机制 · 持续推进</h4>
+        <p>联动QQ安全中心，探索<strong>诈骗标签自动化对接</strong>；<br>建立常态化的关键词监测+玩家举报+定期清理流程。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. 三步走方案 ===== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--info-light);color:var(--info);">📋</div>
+      <h2 class="section-title">三步走执行方案（来自芙蓉方案框架）</h2>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase phase-1">
+      <div class="phase-header">
+        <span class="phase-badge">PHASE 1</span>
+        <span class="phase-title">社区征集 + 关键词跑量 → 首批封号</span>
+        <span class="phase-deadline">📆 优先级最高 · 本周启动</span>
+      </div>
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-num">1</div>
+          <div class="task-content">
+            <div class="task-title">各社区发起骗子举报征集</div>
+            <div class="task-desc">在掌炫贴吧、小红书、QQ群、游戏社区发收集帖，征集：举报的游戏账号、对应QQ号、聊天截图证据</div>
+          </div>
+          <span class="task-owner owner-ops">饺子(澍祺)</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">2</div>
+          <div class="task-content">
+            <div class="task-title">提炼高频骗术关键词</div>
+            <div class="task-desc">从征集材料中提取关键词（如：向日葵、挂对戒、代练、对戒非卖等），构建关键词库</div>
+          </div>
+          <span class="task-owner owner-ops">饺子(澍祺)</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">3</div>
+          <div class="task-content">
+            <div class="task-title">基于X51PlayerChat表回溯聊天记录</div>
+            <div class="task-desc">用关键词批量跑征集名单内账号的聊天记录，验证高频发送骗术话术的行为</div>
+          </div>
+          <span class="task-owner owner-dev">小罗(健玮)</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">4</div>
+          <div class="task-content">
+            <div class="task-title">确认 + 首批封号处理</div>
+            <div class="task-desc">运营侧核实名单后，提交安全侧统一封号处理</div>
+          </div>
+          <span class="task-owner owner-sec">安全侧(田心)</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">5</div>
+          <div class="task-content">
+            <div class="task-title">游戏内+社区公示封号结果</div>
+            <div class="task-desc">发布封号公告，覆盖游戏内公告、社区帖子等渠道，让玩家感知治理行动</div>
+          </div>
+          <span class="task-owner owner-ops">运营组</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase phase-2">
+      <div class="phase-header">
+        <span class="phase-badge">PHASE 2</span>
+        <span class="phase-title">扩大关键词扫描 → 第二波封号</span>
+        <span class="phase-deadline">📆 Phase 1 完成后立即衔接</span>
+      </div>
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-num">1</div>
+          <div class="task-content">
+            <div class="task-title">全量跑"向日葵"关键词</div>
+            <div class="task-desc">在全服聊天数据中专项扫描包含"向日葵"的记录——据观察，引导安装此软件的基本100%是骗子</div>
+          </div>
+          <span class="task-owner owner-dev">小罗(健玮)</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">2</div>
+          <div class="task-content">
+            <div class="task-title">扩展关键词扫描</div>
+            <div class="task-desc">对"挂对戒"等其他高频关键词全量跑数据，按发送频率排序，评估命中率</div>
+          </div>
+          <span class="task-owner owner-dev">小罗(健玮)</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">3</div>
+          <div class="task-content">
+            <div class="task-title">评估关键词命中精准度</div>
+            <div class="task-desc">如果命中基本都是期望处罚的 → 安全侧前置拦截+禁言<br>如果有大比例正常聊天 → 需运营人工过滤确认</div>
+          </div>
+          <span class="task-owner owner-all">运营+安全</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">4</div>
+          <div class="task-content">
+            <div class="task-title">第二波封号处理 + 公示</div>
+            <div class="task-desc">验证后提交处罚，持续公示</div>
+          </div>
+          <span class="task-owner owner-sec">安全侧(田心)</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase phase-3">
+      <div class="phase-header">
+        <span class="phase-badge">PHASE 3</span>
+        <span class="phase-title">联动QQ安全 + 长效机制建设</span>
+        <span class="phase-deadline">📆 中长期推进</span>
+      </div>
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-num">1</div>
+          <div class="task-content">
+            <div class="task-title">推动QQ安全中心协作</div>
+            <div class="task-desc">安全侧已有合作渠道，将收集的诈骗QQ号同步给QQ安全中心交叉验证，针对QQ号和群做处理</div>
+          </div>
+          <span class="task-owner owner-sec">安全侧(田心)</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">2</div>
+          <div class="task-content">
+            <div class="task-title">探索诈骗标签自动化对接</div>
+            <div class="task-desc">如QQ侧有诈骗标签，同步给炫舞侧，在游戏内对相关好友推送警示提醒（类似QQ已有的诈骗好友弹窗机制）</div>
+          </div>
+          <span class="task-owner owner-all">安全+开发</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">3</div>
+          <div class="task-content">
+            <div class="task-title">发布官方防骗指南</div>
+            <div class="task-desc">可借助"腾讯游戏安全中心"公众号联合发布；游戏内聊天界面加防骗提醒标识</div>
+          </div>
+          <span class="task-owner owner-all">运营+安全</span>
+        </li>
+        <li class="task-item">
+          <div class="task-num">4</div>
+          <div class="task-content">
+            <div class="task-title">建立常态化巡检机制</div>
+            <div class="task-desc">定期监测外网舆情（贴吧/小红书），持续关注变种骗术，保持治理节奏</div>
+          </div>
+          <span class="task-owner owner-ops">运营组</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 4. 分工一览 ===== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--success-light);color:var(--success);">👥</div>
+      <h2 class="section-title">分工一览</h2>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="division-table">
+        <thead>
+          <tr>
+            <th style="width:130px;">角色</th>
+            <th style="width:140px;">负责人</th>
+            <th>核心职责</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>统筹推进</strong></td>
+            <td>
+              <span class="person-tag owner-ops">饺子(澍祺)</span>
+            </td>
+            <td>组织社区征集、提炼关键词、整理举报名单、推动公示、拉会协调各方</td>
+          </tr>
+          <tr>
+            <td><strong>方案发起</strong></td>
+            <td>
+              <span class="person-tag owner-ops">芙蓉(amyfrliu)</span>
+            </td>
+            <td>提出三步走方案框架、外网舆情监测、推动落地节奏</td>
+          </tr>
+          <tr>
+            <td><strong>数据支持</strong></td>
+            <td>
+              <span class="person-tag owner-dev">小罗(健玮)</span>
+            </td>
+            <td>筛查X51PlayerChat聊天日志、关键词全量跑数据、输出命中名单</td>
+          </tr>
+          <tr>
+            <td><strong>安全对接</strong></td>
+            <td>
+              <span class="person-tag owner-sec">田心(polarzhou)</span>
+            </td>
+            <td>接收名单执行封号处罚、推动QQ安全合作、提供安全对抗思路</td>
+          </tr>
+          <tr>
+            <td><strong>运营协同</strong></td>
+            <td>
+              <span class="person-tag owner-ops">Mira / 翩翩 / 青鸟</span>
+            </td>
+            <td>协助社区收集、防骗指南内容制作、公示执行、游戏内提醒设计</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== 5. 时间线 ===== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FEF3C7;color:#D97706;">⏱️</div>
+      <h2 class="section-title">关键时间节点</h2>
+    </div>
+
+    <div class="card">
+      <div class="timeline">
+        <div class="tl-item active">
+          <div class="tl-dot"></div>
+          <div class="tl-date">4月17日（明天）</div>
+          <div class="tl-title">对齐会 · 确认方案 & 分工</div>
+          <div class="tl-desc">11:00-12:00 科兴D栋线下会；确认三步走方案、明确各方职责和交付物</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">4月17日-4月底</div>
+          <div class="tl-title">Phase 1 · 征集 + 首批封号</div>
+          <div class="tl-desc">各社区发布征集帖 → 收集整理 → 数据跑量验证 → 首批封号 → 公示</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">4月底-5月初</div>
+          <div class="tl-title">Phase 2 · 扩大扫描 + 第二波封号</div>
+          <div class="tl-desc">全量关键词扫描 → 精准度评估 → 第二波封号 → 持续公示</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">5月周年庆前</div>
+          <div class="tl-title">🎯 治理阶段性成果交付</div>
+          <div class="tl-desc">完成两波集中封号 + 公示；发布官方防骗指南；游戏内增加防骗提醒</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">5月起 · 持续</div>
+          <div class="tl-title">Phase 3 · 长效机制</div>
+          <div class="tl-desc">推动QQ安全对接 → 探索自动化标签 → 常态化巡检</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. 风险 & 待决事项 ===== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--danger-light);color:var(--danger);">⚡</div>
+      <h2 class="section-title">风险提示 & 待决事项</h2>
+    </div>
+
+    <div class="risk-grid" style="margin-bottom:20px;">
+      <div class="risk-card high">
+        <div class="risk-label">🔴 高风险</div>
+        <h4>误判风险</h4>
+        <p>"挂对戒"等关键词可能与正常社交重合度高，需评估命中精准率后决定处罚策略</p>
+      </div>
+      <div class="risk-card high">
+        <div class="risk-label">🔴 高风险</div>
+        <h4>黑产快速变种</h4>
+        <p>安全侧提醒：关键词拦截可能几分钟内被绕过，需要持续关注外网变化，打一波会立刻变种</p>
+      </div>
+      <div class="risk-card medium">
+        <div class="risk-label">🟡 待确认</div>
+        <h4>QQ标签合作可行性</h4>
+        <p>QQ平台目前未提供诈骗判定数据，安全侧可推动但结果待定</p>
+      </div>
+      <div class="risk-card medium">
+        <div class="risk-label">🟡 待确认</div>
+        <h4>联系方式拦截的取舍</h4>
+        <p>全面拦截含联系方式的发言可遏制引流，但会损失正常社交体验，需项目侧决策</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">❓ 明天会上需要对齐的决策点</h3>
+      <ul class="decision-list">
+        <li class="decision-item">
+          <div class="decision-icon">1</div>
+          <div class="decision-text">
+            关键词命中精准度标准：多高的命中率可以直接执行封号？低于阈值如何处理？
+            <small>关系到 Phase 2 是自动处罚还是人工审核</small>
+          </div>
+        </li>
+        <li class="decision-item">
+          <div class="decision-icon">2</div>
+          <div class="decision-text">
+            是否启用联系方式拦截策略？能接受多大程度的正常社交误伤？
+            <small>安全侧可按规则拦截所有含联系方式的发言，但需项目侧权衡</small>
+          </div>
+        </li>
+        <li class="decision-item">
+          <div class="decision-icon">3</div>
+          <div class="decision-text">
+            封号力度的定级：永久封禁 / 临时封禁（多久）/ 禁言处理？分别适用什么场景？
+            <small>需要给安全侧明确的处罚力度预期</small>
+          </div>
+        </li>
+        <li class="decision-item">
+          <div class="decision-icon">4</div>
+          <div class="decision-text">
+            社区征集帖的发布时间和渠道覆盖确认
+            <small>掌炫贴吧 / 小红书 / QQ群 / 游戏内公告？是否需要模板统一？</small>
+          </div>
+        </li>
+        <li class="decision-item">
+          <div class="decision-icon">5</div>
+          <div class="decision-text">
+            之前安全侧同步的UGC环境优化建议，游戏侧评估结论？
+            <small>田心提到此前已同步过优化建议，需确认推进状态</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  QQ炫舞 游戏环境反诈专项治理 · 内部会议材料 · 2026年4月17日
+</footer>
+
+</body>
+</html>
