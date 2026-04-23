@@ -3,1611 +3,531 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QQ炫舞 游戏环境反诈专项治理 · 对齐会</title>
+<title>QQ炫舞 · X51 64位客户端体验调研报告</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
-
-  :root {
-    --primary: #6C5CE7;
-    --primary-light: #A29BFE;
-    --primary-dark: #5A4BD1;
-    --danger: #E74C3C;
-    --danger-light: #FDEDEC;
-    --warning: #F39C12;
-    --warning-light: #FEF9E7;
-    --success: #27AE60;
-    --success-light: #EAFAF1;
-    --info: #3498DB;
-    --info-light: #EBF5FB;
-    --bg: #F8F9FE;
-    --card: #FFFFFF;
-    --text: #2D3436;
-    --text-secondary: #636E72;
-    --border: #E8E8F0;
-    --shadow: 0 2px 16px rgba(108, 92, 231, 0.08);
-    --shadow-hover: 0 8px 32px rgba(108, 92, 231, 0.15);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    min-height: 100vh;
-  }
-
-  /* ===== Hero Header ===== */
-  .hero {
-    background: linear-gradient(135deg, #6C5CE7 0%, #a855f7 50%, #ec4899 100%);
-    padding: 48px 0 56px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
-    animation: pulse 8s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-  .hero-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-    position: relative;
-    z-index: 1;
-  }
-  .hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 6px 16px;
-    border-radius: 20px;
-    margin-bottom: 16px;
-    letter-spacing: 1px;
-  }
-  .hero h1 {
-    color: #fff;
-    font-size: 36px;
-    font-weight: 900;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
-  }
-  .hero .subtitle {
-    color: rgba(255,255,255,0.85);
-    font-size: 16px;
-    font-weight: 300;
-  }
-  .hero-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
-  .hero-meta-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255,255,255,0.9);
-    font-size: 14px;
-  }
-  .hero-meta-item .icon {
-    width: 32px;
-    height: 32px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  /* ===== Main Container ===== */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 32px 60px;
-  }
-
-  /* ===== Section ===== */
-  .section {
-    margin-bottom: 36px;
-  }
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .section-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-  .section-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  /* ===== Card ===== */
-  .card {
-    background: var(--card);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    padding: 28px;
-    transition: box-shadow 0.3s;
-  }
-  .card:hover {
-    box-shadow: var(--shadow-hover);
-  }
-
-  /* ===== Fraud Pattern ===== */
-  .fraud-flow {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    overflow-x: auto;
-    padding: 8px 0;
-  }
-  .fraud-step {
-    flex: 1;
-    min-width: 150px;
-    text-align: center;
-    position: relative;
-    padding: 0 8px;
-  }
-  .fraud-step-num {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--danger), #C0392B);
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 14px;
-    margin: 0 auto 10px;
-    position: relative;
-    z-index: 2;
-  }
-  .fraud-step-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--danger);
-    margin-bottom: 4px;
-  }
-  .fraud-step-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-  }
-  .fraud-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 18px;
-    left: calc(50% + 22px);
-    width: calc(100% - 44px);
-    height: 2px;
-    background: linear-gradient(90deg, var(--danger), rgba(231,76,60,0.3));
-    z-index: 1;
-  }
-
-  /* ===== Key Points ===== */
-  .key-points {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .key-point {
-    background: var(--danger-light);
-    border: 1px solid rgba(231,76,60,0.15);
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-  }
-  .key-point .emoji { font-size: 28px; margin-bottom: 6px; }
-  .key-point .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 2px; }
-  .key-point .value { font-size: 15px; font-weight: 700; color: var(--danger); }
-
-  /* ===== Constraint Box ===== */
-  .constraint-box {
-    background: var(--warning-light);
-    border-left: 4px solid var(--warning);
-    border-radius: 0 12px 12px 0;
-    padding: 20px 24px;
-    margin-top: 16px;
-  }
-  .constraint-box h4 {
-    color: var(--warning);
-    font-size: 15px;
-    margin-bottom: 8px;
-  }
-  .constraint-box ul {
-    list-style: none;
-    padding: 0;
-  }
-  .constraint-box li {
-    font-size: 14px;
-    color: var(--text-secondary);
-    padding: 4px 0;
-    padding-left: 20px;
-    position: relative;
-  }
-  .constraint-box li::before {
-    content: '⚠';
-    position: absolute;
-    left: 0;
-    top: 4px;
-    font-size: 12px;
-  }
-
-  /* ===== Goal Cards ===== */
-  .goals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
-  }
-  .goal-card {
-    background: var(--card);
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    padding: 24px;
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-  }
-  .goal-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-  }
-  .goal-card.primary::before { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
-  .goal-card.danger::before { background: linear-gradient(90deg, var(--danger), #E74C3C); }
-  .goal-card.success::before { background: linear-gradient(90deg, var(--success), #2ECC71); }
-  .goal-card .goal-icon { font-size: 32px; margin-bottom: 8px; }
-  .goal-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-  .goal-card p { font-size: 13px; color: var(--text-secondary); }
-
-  /* ===== Three Phases ===== */
-  .phase {
-    background: var(--card);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    padding: 28px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .phase::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-  }
-  .phase.phase-1::before { background: linear-gradient(180deg, #E74C3C, #C0392B); }
-  .phase.phase-2::before { background: linear-gradient(180deg, #F39C12, #E67E22); }
-  .phase.phase-3::before { background: linear-gradient(180deg, #3498DB, #2980B9); }
-
-  .phase-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .phase-badge {
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.5px;
-  }
-  .phase-1 .phase-badge { background: var(--danger); }
-  .phase-2 .phase-badge { background: var(--warning); }
-  .phase-3 .phase-badge { background: var(--info); }
-  .phase-title {
-    font-size: 18px;
-    font-weight: 700;
-  }
-  .phase-deadline {
-    margin-left: auto;
-    font-size: 12px;
-    color: var(--text-secondary);
-    background: var(--bg);
-    padding: 4px 12px;
-    border-radius: 8px;
-    white-space: nowrap;
-  }
-
-  .task-list {
-    list-style: none;
-    padding: 0;
-  }
-  .task-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-    background: var(--bg);
-    transition: background 0.2s;
-  }
-  .task-item:hover { background: #F0EFFE; }
-  .task-num {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .phase-1 .task-num { background: var(--danger); }
-  .phase-2 .task-num { background: var(--warning); }
-  .phase-3 .task-num { background: var(--info); }
-  .task-content { flex: 1; }
-  .task-content .task-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 2px;
-  }
-  .task-content .task-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-  }
-  .task-owner {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 6px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .owner-ops { background: #F3E8FF; color: #7C3AED; }
-  .owner-sec { background: #DBEAFE; color: #2563EB; }
-  .owner-dev { background: #D1FAE5; color: #059669; }
-  .owner-all { background: #FEF3C7; color: #D97706; }
-
-  /* ===== Division Table ===== */
-  .division-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .division-table th {
-    background: linear-gradient(135deg, #6C5CE7, #a855f7);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 14px 16px;
-    text-align: left;
-  }
-  .division-table td {
-    font-size: 13px;
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-  .division-table tr:last-child td { border-bottom: none; }
-  .division-table tr:nth-child(even) td { background: #FAFAFE; }
-  .division-table .person-tag {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    margin: 2px 2px;
-  }
-
-  /* ===== Timeline ===== */
-  .timeline {
-    position: relative;
-    padding-left: 32px;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 14px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--primary), var(--primary-light), #e8e8f0);
-  }
-  .tl-item {
-    position: relative;
-    padding-bottom: 24px;
-  }
-  .tl-item:last-child { padding-bottom: 0; }
-  .tl-dot {
-    position: absolute;
-    left: -24px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 3px solid var(--primary);
-    background: #fff;
-  }
-  .tl-item.active .tl-dot {
-    background: var(--primary);
-    box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.2);
-  }
-  .tl-date {
-    font-size: 12px;
-    color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .tl-title {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .tl-desc {
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-
-  /* ===== Risk Box ===== */
-  .risk-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
-  }
-  .risk-card {
-    border-radius: 12px;
-    padding: 20px;
-    border: 1px solid;
-  }
-  .risk-card.high {
-    background: var(--danger-light);
-    border-color: rgba(231,76,60,0.2);
-  }
-  .risk-card.medium {
-    background: var(--warning-light);
-    border-color: rgba(243,156,18,0.2);
-  }
-  .risk-card .risk-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .risk-card.high .risk-label { color: var(--danger); }
-  .risk-card.medium .risk-label { color: var(--warning); }
-  .risk-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .risk-card p { font-size: 12px; color: var(--text-secondary); }
-
-  /* ===== Decision Box ===== */
-  .decision-list {
-    list-style: none;
-    padding: 0;
-  }
-  .decision-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px dashed var(--border);
-  }
-  .decision-item:last-child { border-bottom: none; }
-  .decision-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: var(--primary);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .decision-text {
-    font-size: 14px;
-    font-weight: 500;
-  }
-  .decision-text small {
-    display: block;
-    font-size: 12px;
-    color: var(--text-secondary);
-    font-weight: 400;
-    margin-top: 2px;
-  }
-
-  /* ===== Footer ===== */
-  .footer {
-    text-align: center;
-    padding: 32px;
-    color: var(--text-secondary);
-    font-size: 12px;
-    border-top: 1px solid var(--border);
-    margin-top: 20px;
-  }
-
-  /* ===== Responsive ===== */
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 26px; }
-    .container { padding: 24px 16px 40px; }
-    .fraud-flow { flex-direction: column; gap: 12px; }
-    .fraud-step:not(:last-child)::after { display: none; }
-    .phase-header { flex-wrap: wrap; }
-    .phase-deadline { margin-left: 0; }
-  }
-
-  /* ===== Evidence Gallery ===== */
-  .evidence-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .evidence-card {
-    background: var(--card);
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.3s;
-  }
-  .evidence-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-  }
-  .evidence-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 16px 0;
-  }
-  .evidence-platform {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 6px;
-    letter-spacing: 0.5px;
-  }
-  .platform-xiaohongshu { background: #FFECE5; color: #FF2442; }
-  .platform-tieba { background: #E8F4FD; color: #4A90D9; }
-  .platform-zhihu { background: #EAF3FF; color: #0066FF; }
-  .platform-douyin { background: #1a1a2e; color: #FE2C55; }
-  .platform-official { background: #E8F5E9; color: #2E7D32; }
-  .platform-game { background: #F3E8FF; color: #7C3AED; }
-  .evidence-source {
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
-  .evidence-date {
-    margin-left: auto;
-    font-size: 11px;
-    color: #aaa;
-  }
-  .evidence-body {
-    padding: 12px 16px 16px;
-  }
-  .evidence-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: var(--text);
-    line-height: 1.4;
-  }
-  .evidence-quote {
-    font-size: 13px;
-    color: var(--text-secondary);
-    background: var(--bg);
-    border-left: 3px solid var(--primary-light);
-    padding: 10px 14px;
-    border-radius: 0 8px 8px 0;
-    margin-top: 8px;
-    line-height: 1.6;
-  }
-  .evidence-quote em {
-    color: var(--danger);
-    font-style: normal;
-    font-weight: 600;
-  }
-  .evidence-stats {
-    display: flex;
-    gap: 16px;
-    padding: 10px 16px;
-    border-top: 1px solid var(--border);
-    font-size: 11px;
-    color: #aaa;
-  }
-  .evidence-tag {
-    display: inline-block;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: var(--danger-light);
-    color: var(--danger);
-    font-weight: 600;
-    margin: 2px 2px 0 0;
-  }
-
-  /* ===== Fraud Types (防骗百科) ===== */
-  .fraud-types-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 12px;
-    margin-top: 12px;
-  }
-  .fraud-type-card {
-    background: linear-gradient(135deg, #2D2D3F, #1a1a2e);
-    border-radius: 12px;
-    padding: 16px 18px;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-  }
-  .fraud-type-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #FF4757, #FF6B81);
-  }
-  .fraud-type-num {
-    display: inline-block;
-    background: rgba(255,71,87,0.2);
-    color: #FF4757;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 6px;
-  }
-  .fraud-type-title {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.5;
-    color: rgba(255,255,255,0.95);
-  }
-
-  /* ===== Stats Summary ===== */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    margin-top: 16px;
-  }
-  .stat-pill {
-    background: linear-gradient(135deg, var(--danger), #C0392B);
-    color: #fff;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-  }
-  .stat-pill .stat-number {
-    font-size: 28px;
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-pill .stat-label {
-    font-size: 12px;
-    opacity: 0.85;
-  }
-
-  /* ===== Source Link ===== */
-  .source-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    color: var(--primary);
-    text-decoration: none;
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: rgba(108,92,231,0.08);
-    transition: background 0.2s;
-  }
-  .source-link:hover {
-    background: rgba(108,92,231,0.15);
-  }
-
-  /* Print */
-  @media print {
-    .hero { background: #6C5CE7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .card, .phase { box-shadow: none; border: 1px solid #ddd; }
-    .evidence-card { break-inside: avoid; }
-    .fraud-type-card { background: #333 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  }
+  :root{
+    --bg:#0b1020; --panel:#141a33; --panel2:#1a2144; --line:#2a3260;
+    --text:#e8ecff; --sub:#a8b0d8; --accent:#7c9cff; --good:#3ec28f;
+    --bad:#ff6b7a; --warn:#ffb454; --neutral:#9aa4d6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b1020,#0d1230);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}
+  .container{max-width:1320px;margin:0 auto;padding:28px 24px}
+  .header{padding:28px 32px;border-radius:18px;background:linear-gradient(135deg,#1a2352,#2a1e60);border:1px solid var(--line);margin-bottom:24px;position:relative;overflow:hidden}
+  .header::before{content:"";position:absolute;right:-40px;top:-40px;width:240px;height:240px;background:radial-gradient(closest-side,#5a6cff55,transparent);border-radius:50%}
+  .tag{display:inline-block;padding:4px 12px;border-radius:20px;background:#ffffff1a;font-size:12px;color:var(--sub);margin-right:8px}
+  .h1{font-size:28px;font-weight:700;margin:10px 0 6px}
+  .h-sub{color:var(--sub);font-size:14px;max-width:820px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+  .kpi{background:#ffffff0d;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .kpi .v{font-size:24px;font-weight:700;color:#fff}
+  .kpi .k{font-size:12px;color:var(--sub);margin-top:2px}
+  .section{margin-top:28px}
+  .section-title{font-size:18px;font-weight:700;padding-left:12px;border-left:3px solid var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .section-title .num{background:var(--accent);color:#fff;font-size:12px;padding:2px 8px;border-radius:10px;font-weight:600}
+  .grid{display:grid;gap:16px}
+  .grid-2{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){.grid-2,.grid-3,.kpis{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card h3{margin:0 0 4px;font-size:15px;color:#fff}
+  .card .desc{font-size:12px;color:var(--sub);margin-bottom:10px}
+  .chart{width:100%;height:300px}
+  .chart-lg{height:360px}
+  .note{background:#ffffff08;border-left:3px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:13px;color:#f0e7cf;margin-top:12px}
+  .insight{background:linear-gradient(90deg,#1e2b5a,#142048);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:14px}
+  .insight h4{margin:0 0 10px;font-size:15px;color:var(--accent)}
+  .insight ul{margin:0;padding-left:18px}
+  .insight li{margin:6px 0;font-size:14px;color:#dfe5ff}
+  .insight li b{color:#fff}
+  .table{width:100%;border-collapse:collapse;font-size:13px}
+  .table th,.table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+  .table th{background:#ffffff0d;color:var(--sub);font-weight:500}
+  .table td.hi{background:#ff6b7a20;color:#ffd2d6;font-weight:600}
+  .table td.ok{background:#3ec28f20;color:#caffe8;font-weight:600}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;margin-right:4px}
+  .badge.good{background:#3ec28f33;color:#a8f3cf}
+  .badge.bad{background:#ff6b7a33;color:#ffc2c8}
+  .badge.neu{background:#9aa4d633;color:#cfd6ff}
+  .footer{margin-top:40px;padding:18px;text-align:center;color:var(--sub);font-size:12px;border-top:1px solid var(--line)}
+  .tabs{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .tab{padding:6px 12px;background:#ffffff0d;border:1px solid var(--line);border-radius:16px;cursor:pointer;font-size:12px;color:var(--sub)}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 </style>
 </head>
 <body>
-
-<!-- ===== HERO ===== -->
-<header class="hero">
-  <div class="hero-content">
-    <div class="hero-badge">🛡️ 专项治理 · SPECIAL CAMPAIGN</div>
-    <h1>QQ炫舞 游戏环境反诈专项治理</h1>
-    <div class="subtitle">对齐目标 · 拆分事项 · 明确分工</div>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <div class="icon">📅</div>
-        <div>
-          <div style="font-weight:600">会议时间</div>
-          <div style="font-size:12px;opacity:0.8">4月17日（周四）11:00-12:00</div>
-        </div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="icon">📍</div>
-        <div>
-          <div style="font-weight:600">会议地点</div>
-          <div style="font-size:12px;opacity:0.8">科兴D栋 · 线下</div>
-        </div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="icon">🎯</div>
-        <div>
-          <div style="font-weight:600">目标节点</div>
-          <div style="font-size:12px;opacity:0.8">5月周年庆前完成首批治理</div>
-        </div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="icon">👥</div>
-        <div>
-          <div style="font-weight:600">参会人员</div>
-          <div style="font-size:12px;opacity:0.8">芙蓉 / 饺子 / 田心 / 小罗 / Mira / 翩翩 / 青鸟</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-
 <div class="container">
 
-  <!-- ===== 1. 背景 & 骗术分析 ===== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon" style="background:var(--danger-light);color:var(--danger);">🔍</div>
-      <h2 class="section-title">问题背景 & 骗术链路分析</h2>
-    </div>
-
-    <div class="card">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--danger);">📌 典型骗术流程（已验证）</h3>
-      <div class="fraud-flow">
-        <div class="fraud-step">
-          <div class="fraud-step-num">1</div>
-          <div class="fraud-step-title">接触引诱</div>
-          <div class="fraud-step-desc">以"挂名片"或<br>"完成任务"为由<br>添加家族好友</div>
-        </div>
-        <div class="fraud-step">
-          <div class="fraud-step-num">2</div>
-          <div class="fraud-step-title">话术铺垫</div>
-          <div class="fraud-step-desc">谎称找代练<br>买了对戒<br>建立信任</div>
-        </div>
-        <div class="fraud-step">
-          <div class="fraud-step-num">3</div>
-          <div class="fraud-step-title">引导出游戏</div>
-          <div class="fraud-step-desc">引导加入<br>"对戒非卖群"<br>或外部网页/客服</div>
-        </div>
-        <div class="fraud-step">
-          <div class="fraud-step-num">4</div>
-          <div class="fraud-step-title">安装软件</div>
-          <div class="fraud-step-desc">引导下载<br><strong>"向日葵"</strong><br>远程桌面软件</div>
-        </div>
-        <div class="fraud-step">
-          <div class="fraud-step-num">5</div>
-          <div class="fraud-step-title">实施诈骗</div>
-          <div class="fraud-step-desc">远程操控账号<br>引导"赠送/淘宝下单"<br>刷单刷钱</div>
-        </div>
-      </div>
-
-      <div class="key-points">
-        <div class="key-point">
-          <div class="emoji">🤖</div>
-          <div class="label">骗子特征</div>
-          <div class="value">批量买号（200-500级）<br>疑似工作室操作</div>
-        </div>
-        <div class="key-point">
-          <div class="emoji">🎯</div>
-          <div class="label">目标群体</div>
-          <div class="value">回流玩家为主<br>不熟悉游戏、好友少、易骗</div>
-        </div>
-        <div class="key-point">
-          <div class="emoji">📢</div>
-          <div class="label">外网反响</div>
-          <div class="value">掌炫贴吧、小红书<br>大量玩家吐槽</div>
-        </div>
-        <div class="key-point">
-          <div class="emoji">⏰</div>
-          <div class="label">紧迫性</div>
-          <div class="value">5月周年庆前必须治理<br>保障回流体验</div>
-        </div>
-      </div>
-
-      <div class="constraint-box">
-        <h4>⚠️ 安全侧当前约束（来自 polarzhou 反馈）</h4>
-        <ul>
-          <li>游戏内检测到的行为比较正常，无法直接按恶意发言处罚</li>
-          <li>引导游戏外沟通的内容，安全侧检测不了（超出管辖范围）</li>
-          <li>多为一对一聊天，难以触发刷屏检测</li>
-          <li>关键词拦截会快速被黑产绕过（变种对抗是长期事项）</li>
-          <li>如拦截所有含联系方式的发言，会误伤正常社交聊天</li>
-          <li>聊天记录留存时间很短，往前回溯有限</li>
-          <li>QQ平台暂不提供诈骗标签数据，需推动合作</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 1.5 外网舆情实录 ===== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon" style="background:#FFF3E0;color:#E65100;">📸</div>
-      <h2 class="section-title">外网舆情实录 · 玩家真实反馈</h2>
-    </div>
-
-    <!-- 舆情数据汇总 -->
-    <div class="card" style="margin-bottom:16px;">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">📊 舆情数据摘要</h3>
-      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">
-        以下数据基于掌炫贴吧（QQ炫舞社区）、小红书、百度贴吧、炫舞街心花园官方论坛、知乎、抖音等多平台搜索整理。<br>
-        搜索关键词：<span class="evidence-tag">骗子</span><span class="evidence-tag">诈骗</span><span class="evidence-tag">对戒</span><span class="evidence-tag">向日葵</span><span class="evidence-tag">远程</span><span class="evidence-tag">挂名片</span>
-      </p>
-      <div class="stats-row">
-        <div class="stat-pill">
-          <div class="stat-number">6+</div>
-          <div class="stat-label">涉及平台数</div>
-        </div>
-        <div class="stat-pill" style="background:linear-gradient(135deg, #E67E22, #D35400);">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">可检索相关帖/视频</div>
-        </div>
-        <div class="stat-pill" style="background:linear-gradient(135deg, #8E44AD, #6C3483);">
-          <div class="stat-number">38万</div>
-          <div class="stat-label">已知单笔最高损失(元)</div>
-        </div>
-        <div class="stat-pill" style="background:linear-gradient(135deg, #2C3E50, #34495E);">
-          <div class="stat-number">2024-至今</div>
-          <div class="stat-label">问题持续时间</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 截图素材展示 - 来自运营提供 -->
-    <div class="card" style="margin-bottom:16px;">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px;">🔴 运营实地收集（芙蓉提供 · 8份截图素材）</h3>
-      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">以下内容直接摘录自运营人员在掌炫贴吧和小红书的实地调查截图</p>
-
-      <div class="evidence-grid">
-
-        <!-- 截图1: 小红书 筠伊 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-xiaohongshu">小红书</span>
-            <span class="evidence-source">@筠伊</span>
-            <span class="evidence-date">2025-05-11</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">骗子遍布，回流玩家首当其冲</div>
-            <div class="evidence-quote">
-              "这种骗子很多，<em>每次上线都能遇见四五个</em>" —— 评论@bie。<br><br>
-              "我最近好遇到一个这种的，胜在了我没用电脑下载不了那个<em>远程操控软件</em>…我这最近刚回归的" —— 评论@月^
-            </div>
-          </div>
-          <div class="evidence-stats">
-            <span>👁️ 355浏览</span>
-            <span>💬 5评论</span>
-            <span>👍 12赞</span>
-          </div>
-        </div>
-
-        <!-- 截图5: 小红书 是三妹呀 主帖 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-xiaohongshu">小红书</span>
-            <span class="evidence-source">@是三妹呀 · 社区卷卷侠</span>
-            <span class="evidence-date">2025-05-25</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">"团伙作案，肯定是骗钱的！"</div>
-            <div class="evidence-quote">
-              游戏内私聊截图曝光：骗子以"挂特效戒指结婚"为名搭讪<br>
-              <em>"小姐姐 我们游戏跨区结婚 可以吗"</em><br>
-              <em>"我们一起挂个特效戒指结婚 可以吗？？"</em>
-            </div>
-          </div>
-          <div class="evidence-stats">
-            <span>👁️ 389浏览</span>
-            <span>💬 12评论</span>
-            <span>👍 39赞</span>
-          </div>
-        </div>
-
-        <!-- 截图4: 小红书 是三妹呀 评论区 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-xiaohongshu">小红书</span>
-            <span class="evidence-source">@是三妹呀 评论区</span>
-            <span class="evidence-date">2025-05-26</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">多区骗子横行，评论区大量共鸣</div>
-            <div class="evidence-quote">
-              "全是一舞的问的，是这个区骗子多吗，有<em>两个私聊过我</em>" —— @也许是明天<br><br>
-              "就是骗钱的，我第一次不知道被<em>骗了三百</em>，说我的号冻结了" —— 楼主回复<br><br>
-              "我每次回复可以 你包对戒 <em>别让我点平台链接</em> 他就不回我了" —— @那只猫<br><br>
-              "什么戈亦的也私聊过我，原来是骗子，避雷了" —— @是璟
-            </div>
-          </div>
-          <div class="evidence-stats">
-            <span>💬 12评论</span>
-            <span>👍 39赞</span>
-            <span>⭐ 1收藏</span>
-          </div>
-        </div>
-
-        <!-- 截图8: 小红书 澍澍 详细被骗2000 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-xiaohongshu">小红书</span>
-            <span class="evidence-source">@澍澍lomdhXZO</span>
-            <span class="evidence-date">2025-09-18</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">"大家警戒！！！骗我2000块"</div>
-            <div class="evidence-quote">
-              "先帮我300块我自己买好的道具帮我抽到冷焰脸，<em>博取信任</em>，后面再抽到珍宝甄选、占卜、开箱子，<em>截图都是假的</em>，套路你充值qb买道具抽奖实则买道具赠送给他自己"<br><br>
-              "淘宝套路骗了<em>500QB</em>，游戏道具套路骗了<em>1500</em>"<br><br>
-              截图显示骗子号等级：<em>LV355~LV567</em>
-            </div>
-          </div>
-          <div class="evidence-stats">
-            <span>👁️ 440浏览</span>
-            <span>💬 7评论</span>
-            <span>👍 10赞</span>
-          </div>
-        </div>
-
-        <!-- 截图2: 掌炫贴吧搜索结果 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-tieba">掌炫贴吧</span>
-            <span class="evidence-source">搜索"骗" · 全部</span>
-            <span class="evidence-date">2025</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">搜索"骗"一刷一大把</div>
-            <div class="evidence-quote">
-              "<em>不是骗子就是挂 这游戏快倒闭了吗</em>" —— @囍EPgjqDArA (2025-08-22)<br><br>
-              "<em>为啥到处是骗子</em>" —— @敬妳一瓶酒 (2025-06-02) · 共9张截图<br><br>
-              "<em>组队太难了</em>，组队太坑了，都想白嫖，还怕被骗。没有一个人诚心的" —— @终于止 (2025-08-27)
-            </div>
-          </div>
-          <div class="evidence-stats">
-            <span>📄 多帖汇总</span>
-            <span>👍 4-11赞/帖</span>
-          </div>
-        </div>
-
-        <!-- 截图3: 掌炫贴吧搜索结果续 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-tieba">掌炫贴吧</span>
-            <span class="evidence-source">搜索"骗" · 续</span>
-            <span class="evidence-date">2025</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">大量被骗实锤 + 金额曝光</div>
-            <div class="evidence-quote">
-              "这是骗子，穿个小人衣服如下图，<em>骗了我2000</em>，大家警戒" —— 附骗子QQ号<br><br>
-              "上图就是Pian子的qq号和支付宝，<em>套路我2000块qb</em>买道具给他自己" —— @澍澍<br><br>
-              "<em>天会黑，人会变，3分情，7分骗</em> · 世界太假，人心太深，处处是演员" —— @汐宝(炫舞分享达人)
-            </div>
-          </div>
-          <div class="evidence-stats">
-            <span>📄 多帖汇总</span>
-            <span>👍 6-7赞/帖</span>
-          </div>
-        </div>
-
-        <!-- 截图7: 掌炫贴吧搜索结果三 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-tieba">掌炫贴吧</span>
-            <span class="evidence-source">搜索"骗" · 续</span>
-            <span class="evidence-date">2025</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">防骗指南帖+更多被骗经历</div>
-            <div class="evidence-quote">
-              "上图这个骗子到处骗人！回归的，不懂的，<em>多看一下百度炫舞贴吧，防骗指南多看看哦</em>可以避很多" (2025-09-23)<br><br>
-              "今天查了一下，原来真的有很多人被骗了。大家小心 <em>无事献殷勤，上来就送戒指的，就不是什么好人</em>" —— @筠伊 (2025-05-13)<br><br>
-              "大家注意了次人就是一个骗子已各种理由<em>骗钱也不多骗个五十</em>…加上联系方式之后，会跟你们说胃疼什么的再你们借点啥的" —— @Nbi-的男孩 (2025-09-27)
-            </div>
-          </div>
-          <div class="evidence-stats">
-            <span>📄 多帖汇总</span>
-            <span>👍 2-11赞/帖</span>
-          </div>
-        </div>
-
-        <!-- 截图6: 玩家自制防骗百科 -->
-        <div class="evidence-card" style="border-color: var(--danger); border-width: 2px;">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-game">玩家自制</span>
-            <span class="evidence-source">QQ炫舞防骗百科</span>
-            <span class="evidence-date">玩家总结</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title" style="color:var(--danger);">⚠️ 玩家自发总结的8大骗术（说明问题已严重到玩家自救）</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 玩家自制防骗百科详细内容 -->
-    <div class="card" style="margin-bottom:16px;">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px;color:var(--danger);">⚠️ 玩家自发整理的《QQ炫舞防骗百科》8大骗术</h3>
-      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">以下内容直接来自玩家在社区自行制作的防骗提醒图（截图6），说明骗术问题已严重到玩家开始自救</p>
-      <div class="fraud-types-grid">
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #1</div>
-          <div class="fraud-type-title">大厅/房间内挂机时主动私信你挂婚处CP，然后让你找代练买戒指</div>
-        </div>
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #2</div>
-          <div class="fraud-type-title">结完婚叫你玩仙侠及没听过的游戏的游戏托儿，后期会各种方式让你充值游戏</div>
-        </div>
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #3</div>
-          <div class="fraud-type-title">结完婚没几天跟你哭惨各种借钱（大小数都有），谎称家里有事/父母住院等</div>
-        </div>
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #4</div>
-          <div class="fraud-type-title">结完婚谎称上号帮你搭配，以及让你消费各种抽奖池给你出极品图的（P图+盗图怪）</div>
-        </div>
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #5</div>
-          <div class="fraud-type-title">各种喇叭大厅内喊Q币折扣、几十块卡年紫钻、指定绝版奖池物品几十块的</div>
-        </div>
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #6</div>
-          <div class="fraud-type-title">买戒指及抽奖不走担保，让你走淘宝各种扫码登录软件的（木马病毒）</div>
-        </div>
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #7</div>
-          <div class="fraud-type-title">CP或家族不久对方以各种理由跟你借钱的（大小数目都有）</div>
-        </div>
-        <div class="fraud-type-card">
-          <div class="fraud-type-num">骗术 #8</div>
-          <div class="fraud-type-title">让你加红包群及各种挣钱路子刷单让你投入、以及有偿解封WX的</div>
-        </div>
-      </div>
-      <div style="margin-top:12px;padding:10px 14px;background:var(--danger-light);border-radius:8px;text-align:center;">
-        <span style="font-size:14px;font-weight:700;color:var(--danger);">🚨 玩家原文警告：不要贪小便宜 · 天上不会掉馅饼！！！！！</span>
-      </div>
-    </div>
-
-    <!-- 网络搜集的外部案例 -->
-    <div class="card">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px;">🌐 全网检索补充案例（贴吧 / 知乎 / 抖音 / 官方论坛 / 新闻）</h3>
-      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">通过搜索引擎检索"QQ炫舞 骗子 对戒 向日葵 远程"等关键词，以下为典型案例</p>
-
-      <div class="evidence-grid">
-
-        <!-- 百度贴吧 最新 2026年4月 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-tieba">百度贴吧</span>
-            <span class="evidence-source">qq炫舞吧</span>
-            <span class="evidence-date">2026-04-09</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">"送对戒需要远程电脑吗？不需要，是骗子套路！"</div>
-            <div class="evidence-quote">
-              玩家询问送对戒是否需要远程电脑，<em>多人回复确认是骗子</em>。帖子发布仅一周前，说明骗术至今仍在活跃。
-            </div>
-            <div style="margin-top:6px;"><a class="source-link" href="https://tieba.baidu.com/p/9869061981" target="_blank">🔗 查看原帖</a></div>
-          </div>
-        </div>
-
-        <!-- 百度贴吧 2026年3月 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-tieba">百度贴吧</span>
-            <span class="evidence-source">qq炫舞吧</span>
-            <span class="evidence-date">2026-03-29</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">"跨区送戒指要远程？是骗子，千万别信！"</div>
-            <div class="evidence-quote">
-              "刚回归，一直在大厅挂机，现在这个是什么新骗局吗"<br>
-              回复确认：<em>"骗子"</em>。问题持续发酵中。
-            </div>
-            <div style="margin-top:6px;"><a class="source-link" href="https://tieba.baidu.com/p/9016538188" target="_blank">🔗 查看原帖</a></div>
-          </div>
-        </div>
-
-        <!-- 百度贴吧 回归警惕 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-tieba">百度贴吧</span>
-            <span class="evidence-source">qq炫舞吧</span>
-            <span class="evidence-date">2026-04-12</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">"炫舞回归警惕新骗局：专骗回归玩家套路深"</div>
-            <div class="evidence-quote">
-              "我是好久不上网的人了…一打开电脑就玩炫舞"<br>
-              <em>代练诱导下载远程操控软件</em>，利用淘宝下订单及<em>人脸付款诈骗</em>
-            </div>
-            <div style="margin-top:6px;"><a class="source-link" href="https://tieba.baidu.com/p/8934683389" target="_blank">🔗 查看原帖</a></div>
-          </div>
-        </div>
-
-        <!-- 官方论坛案例 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-official">炫舞街心花园</span>
-            <span class="evidence-source">官方论坛 · @Vtaeat</span>
-            <span class="evidence-date">2024-10-16</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">"【聘妻聘夫挂名片戒指】避雷防骗！！！"</div>
-            <div class="evidence-quote">
-              回归半月即遭骗。完整流程：搭讪→加QQ→下载<em>向日葵远程</em>→骗子远程操控→打开京东淘宝扫码→索要银行卡号<br><br>
-              及时止损后发现：<em>工作文件被全部删除</em>，远程控制软件仍未关闭<br><br>
-              评论区：<em>"前段时间就有这样的骗子，今天遇到和你这个一模一样的人，名字、衣服都一样"</em>
-            </div>
-            <div style="margin-top:6px;"><a class="source-link" href="https://bbs.x5.qq.com/forum.php?mod=viewthread&tid=293343" target="_blank">🔗 查看原帖 · 927浏览</a></div>
-          </div>
-        </div>
-
-        <!-- 重大案例：38万 -->
-        <div class="evidence-card" style="border-color:var(--danger);border-width:2px;">
-          <div class="evidence-card-header">
-            <span class="evidence-platform" style="background:#FFCDD2;color:#B71C1C;">⚖️ 司法案例</span>
-            <span class="evidence-source">合肥市检察院 · 搜狐新闻</span>
-            <span class="evidence-date">2025-10</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title" style="color:var(--danger);font-size:15px;">炫舞好友设下"装备"陷阱 · 女子被骗38万元</div>
-            <div class="evidence-quote">
-              吴某某以"可以白嫖游戏装备"的谎言获取被害人信任后，前后共骗取<em>38万元</em>。<br>
-              <strong>最终因诈骗罪获刑六年。</strong><br><br>
-              ⚠️ 这不再只是小额骗术，已上升到刑事犯罪层面。
-            </div>
-            <div style="margin-top:6px;">
-              <a class="source-link" href="https://www.sohu.com/a/943142234_121117080" target="_blank">🔗 搜狐新闻报道</a>
-              <a class="source-link" href="http://www.ahcaw.com/ahcaw/content/2025-10/23/content_9275255.htm" target="_blank">🔗 安徽长安网</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 官方已有处罚行动 -->
-        <div class="evidence-card">
-          <div class="evidence-card-header">
-            <span class="evidence-platform platform-official">QQ炫舞2官网</span>
-            <span class="evidence-source">官方公告</span>
-            <span class="evidence-date">2025-08-29</span>
-          </div>
-          <div class="evidence-body">
-            <div class="evidence-title">官方已有先例：打击外挂刷取对戒处罚公告</div>
-            <div class="evidence-quote">
-              "近期我们发现游戏内部分用户获得大量由外挂恶意刷取的 [摇滚心韵·对戒]…我们将针对恶意开挂刷取账号实行封号"<br><br>
-              <strong>说明：官方已有对"对戒"相关违规的处罚先例，本次专项可以参考此公告的处罚口径和公示模板。</strong>
-            </div>
-            <div style="margin-top:6px;"><a class="source-link" href="https://5s.qq.com/webplat/info/news_version3/1434/36837/36840/36848/m21391/202508/974738.shtml" target="_blank">🔗 官网公告</a></div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- 全网舆情平台汇总 -->
-      <div style="margin-top:16px;padding:16px;background:var(--bg);border-radius:12px;">
-        <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">📡 全网检索覆盖平台一览</h4>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;">
-          <span class="evidence-platform platform-tieba" style="font-size:12px;padding:4px 12px;">百度贴吧 · qq炫舞吧</span>
-          <span class="evidence-platform platform-xiaohongshu" style="font-size:12px;padding:4px 12px;">小红书 · QQ炫舞话题</span>
-          <span class="evidence-platform platform-tieba" style="font-size:12px;padding:4px 12px;">掌炫贴吧(QQ炫舞社区APP)</span>
-          <span class="evidence-platform platform-official" style="font-size:12px;padding:4px 12px;">炫舞街心花园 · 官方论坛</span>
-          <span class="evidence-platform platform-douyin" style="font-size:12px;padding:4px 12px;">抖音 · 炫舞骗局话题</span>
-          <span class="evidence-platform platform-zhihu" style="font-size:12px;padding:4px 12px;">知乎 · 炫舞诈骗经历</span>
-          <span class="evidence-platform" style="font-size:12px;padding:4px 12px;background:#FFCDD2;color:#B71C1C;">司法新闻 · 诈骗判刑案例</span>
-        </div>
-        <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;">
-          💡 <strong>结论：</strong>诈骗问题从2024年初至今持续恶化，已从游戏内社交骗术升级到远程操控诈骗和刑事犯罪级别。玩家自发制作防骗指南、在各平台大量吐槽，已严重影响游戏口碑和新/回流用户体验。<strong>5月周年庆前必须给出治理动作。</strong>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 2. 核心目标 ===== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon" style="background:#F3E8FF;color:#7C3AED;">🎯</div>
-      <h2 class="section-title">本次专项核心目标</h2>
-    </div>
-
-    <div class="goals-grid">
-      <div class="goal-card primary">
-        <div class="goal-icon">🔨</div>
-        <h4>短期打击 · 5月前</h4>
-        <p>收集+核实一批诈骗账号，集中封号处理；<br>在游戏内和社区进行<strong>封号公示</strong>，让玩家感知到我们在肃清游戏环境上做的实际动作。</p>
-      </div>
-      <div class="goal-card danger">
-        <div class="goal-icon">🛡️</div>
-        <h4>防范预警 · 同步进行</h4>
-        <p>游戏内聊天界面增加<strong>谨防诈骗提醒标识</strong>；<br>发布<strong>官方防骗指南</strong>，教育玩家识别常见骗术。</p>
-      </div>
-      <div class="goal-card success">
-        <div class="goal-icon">🤝</div>
-        <h4>长效机制 · 持续推进</h4>
-        <p>联动QQ安全中心，探索<strong>诈骗标签自动化对接</strong>；<br>建立常态化的关键词监测+玩家举报+定期清理流程。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 3. 三步走方案 ===== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon" style="background:var(--info-light);color:var(--info);">📋</div>
-      <h2 class="section-title">三步走执行方案（来自芙蓉方案框架）</h2>
-    </div>
-
-    <!-- Phase 1 -->
-    <div class="phase phase-1">
-      <div class="phase-header">
-        <span class="phase-badge">PHASE 1</span>
-        <span class="phase-title">社区征集 + 关键词跑量 → 首批封号</span>
-        <span class="phase-deadline">📆 优先级最高 · 本周启动</span>
-      </div>
-      <ul class="task-list">
-        <li class="task-item">
-          <div class="task-num">1</div>
-          <div class="task-content">
-            <div class="task-title">各社区发起骗子举报征集</div>
-            <div class="task-desc">在掌炫贴吧、小红书、QQ群、游戏社区发收集帖，征集：举报的游戏账号、对应QQ号、聊天截图证据</div>
-          </div>
-          <span class="task-owner owner-ops">饺子(澍祺)</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">2</div>
-          <div class="task-content">
-            <div class="task-title">提炼高频骗术关键词</div>
-            <div class="task-desc">从征集材料中提取关键词（如：向日葵、挂对戒、代练、对戒非卖等），构建关键词库</div>
-          </div>
-          <span class="task-owner owner-ops">饺子(澍祺)</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">3</div>
-          <div class="task-content">
-            <div class="task-title">基于X51PlayerChat表回溯聊天记录</div>
-            <div class="task-desc">用关键词批量跑征集名单内账号的聊天记录，验证高频发送骗术话术的行为</div>
-          </div>
-          <span class="task-owner owner-dev">小罗(健玮)</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">4</div>
-          <div class="task-content">
-            <div class="task-title">确认 + 首批封号处理</div>
-            <div class="task-desc">运营侧核实名单后，提交安全侧统一封号处理</div>
-          </div>
-          <span class="task-owner owner-sec">安全侧(田心)</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">5</div>
-          <div class="task-content">
-            <div class="task-title">游戏内+社区公示封号结果</div>
-            <div class="task-desc">发布封号公告，覆盖游戏内公告、社区帖子等渠道，让玩家感知治理行动</div>
-          </div>
-          <span class="task-owner owner-ops">运营组</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Phase 2 -->
-    <div class="phase phase-2">
-      <div class="phase-header">
-        <span class="phase-badge">PHASE 2</span>
-        <span class="phase-title">扩大关键词扫描 → 第二波封号</span>
-        <span class="phase-deadline">📆 Phase 1 完成后立即衔接</span>
-      </div>
-      <ul class="task-list">
-        <li class="task-item">
-          <div class="task-num">1</div>
-          <div class="task-content">
-            <div class="task-title">全量跑"向日葵"关键词</div>
-            <div class="task-desc">在全服聊天数据中专项扫描包含"向日葵"的记录——据观察，引导安装此软件的基本100%是骗子</div>
-          </div>
-          <span class="task-owner owner-dev">小罗(健玮)</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">2</div>
-          <div class="task-content">
-            <div class="task-title">扩展关键词扫描</div>
-            <div class="task-desc">对"挂对戒"等其他高频关键词全量跑数据，按发送频率排序，评估命中率</div>
-          </div>
-          <span class="task-owner owner-dev">小罗(健玮)</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">3</div>
-          <div class="task-content">
-            <div class="task-title">评估关键词命中精准度</div>
-            <div class="task-desc">如果命中基本都是期望处罚的 → 安全侧前置拦截+禁言<br>如果有大比例正常聊天 → 需运营人工过滤确认</div>
-          </div>
-          <span class="task-owner owner-all">运营+安全</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">4</div>
-          <div class="task-content">
-            <div class="task-title">第二波封号处理 + 公示</div>
-            <div class="task-desc">验证后提交处罚，持续公示</div>
-          </div>
-          <span class="task-owner owner-sec">安全侧(田心)</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Phase 3 -->
-    <div class="phase phase-3">
-      <div class="phase-header">
-        <span class="phase-badge">PHASE 3</span>
-        <span class="phase-title">联动QQ安全 + 长效机制建设</span>
-        <span class="phase-deadline">📆 中长期推进</span>
-      </div>
-      <ul class="task-list">
-        <li class="task-item">
-          <div class="task-num">1</div>
-          <div class="task-content">
-            <div class="task-title">推动QQ安全中心协作</div>
-            <div class="task-desc">安全侧已有合作渠道，将收集的诈骗QQ号同步给QQ安全中心交叉验证，针对QQ号和群做处理</div>
-          </div>
-          <span class="task-owner owner-sec">安全侧(田心)</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">2</div>
-          <div class="task-content">
-            <div class="task-title">探索诈骗标签自动化对接</div>
-            <div class="task-desc">如QQ侧有诈骗标签，同步给炫舞侧，在游戏内对相关好友推送警示提醒（类似QQ已有的诈骗好友弹窗机制）</div>
-          </div>
-          <span class="task-owner owner-all">安全+开发</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">3</div>
-          <div class="task-content">
-            <div class="task-title">发布官方防骗指南</div>
-            <div class="task-desc">可借助"腾讯游戏安全中心"公众号联合发布；游戏内聊天界面加防骗提醒标识</div>
-          </div>
-          <span class="task-owner owner-all">运营+安全</span>
-        </li>
-        <li class="task-item">
-          <div class="task-num">4</div>
-          <div class="task-content">
-            <div class="task-title">建立常态化巡检机制</div>
-            <div class="task-desc">定期监测外网舆情（贴吧/小红书），持续关注变种骗术，保持治理节奏</div>
-          </div>
-          <span class="task-owner owner-ops">运营组</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ===== 4. 分工一览 ===== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon" style="background:var(--success-light);color:var(--success);">👥</div>
-      <h2 class="section-title">分工一览</h2>
-    </div>
-
-    <div class="card" style="padding:0;overflow:hidden;">
-      <table class="division-table">
-        <thead>
-          <tr>
-            <th style="width:130px;">角色</th>
-            <th style="width:140px;">负责人</th>
-            <th>核心职责</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>统筹推进</strong></td>
-            <td>
-              <span class="person-tag owner-ops">饺子(澍祺)</span>
-            </td>
-            <td>组织社区征集、提炼关键词、整理举报名单、推动公示、拉会协调各方</td>
-          </tr>
-          <tr>
-            <td><strong>方案发起</strong></td>
-            <td>
-              <span class="person-tag owner-ops">芙蓉(amyfrliu)</span>
-            </td>
-            <td>提出三步走方案框架、外网舆情监测、推动落地节奏</td>
-          </tr>
-          <tr>
-            <td><strong>数据支持</strong></td>
-            <td>
-              <span class="person-tag owner-dev">小罗(健玮)</span>
-            </td>
-            <td>筛查X51PlayerChat聊天日志、关键词全量跑数据、输出命中名单</td>
-          </tr>
-          <tr>
-            <td><strong>安全对接</strong></td>
-            <td>
-              <span class="person-tag owner-sec">田心(polarzhou)</span>
-            </td>
-            <td>接收名单执行封号处罚、推动QQ安全合作、提供安全对抗思路</td>
-          </tr>
-          <tr>
-            <td><strong>运营协同</strong></td>
-            <td>
-              <span class="person-tag owner-ops">Mira / 翩翩 / 青鸟</span>
-            </td>
-            <td>协助社区收集、防骗指南内容制作、公示执行、游戏内提醒设计</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== 5. 时间线 ===== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon" style="background:#FEF3C7;color:#D97706;">⏱️</div>
-      <h2 class="section-title">关键时间节点</h2>
-    </div>
-
-    <div class="card">
-      <div class="timeline">
-        <div class="tl-item active">
-          <div class="tl-dot"></div>
-          <div class="tl-date">4月17日（明天）</div>
-          <div class="tl-title">对齐会 · 确认方案 & 分工</div>
-          <div class="tl-desc">11:00-12:00 科兴D栋线下会；确认三步走方案、明确各方职责和交付物</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">4月17日-4月底</div>
-          <div class="tl-title">Phase 1 · 征集 + 首批封号</div>
-          <div class="tl-desc">各社区发布征集帖 → 收集整理 → 数据跑量验证 → 首批封号 → 公示</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">4月底-5月初</div>
-          <div class="tl-title">Phase 2 · 扩大扫描 + 第二波封号</div>
-          <div class="tl-desc">全量关键词扫描 → 精准度评估 → 第二波封号 → 持续公示</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">5月周年庆前</div>
-          <div class="tl-title">🎯 治理阶段性成果交付</div>
-          <div class="tl-desc">完成两波集中封号 + 公示；发布官方防骗指南；游戏内增加防骗提醒</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">5月起 · 持续</div>
-          <div class="tl-title">Phase 3 · 长效机制</div>
-          <div class="tl-desc">推动QQ安全对接 → 探索自动化标签 → 常态化巡检</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 6. 风险 & 待决事项 ===== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon" style="background:var(--danger-light);color:var(--danger);">⚡</div>
-      <h2 class="section-title">风险提示 & 待决事项</h2>
-    </div>
-
-    <div class="risk-grid" style="margin-bottom:20px;">
-      <div class="risk-card high">
-        <div class="risk-label">🔴 高风险</div>
-        <h4>误判风险</h4>
-        <p>"挂对戒"等关键词可能与正常社交重合度高，需评估命中精准率后决定处罚策略</p>
-      </div>
-      <div class="risk-card high">
-        <div class="risk-label">🔴 高风险</div>
-        <h4>黑产快速变种</h4>
-        <p>安全侧提醒：关键词拦截可能几分钟内被绕过，需要持续关注外网变化，打一波会立刻变种</p>
-      </div>
-      <div class="risk-card medium">
-        <div class="risk-label">🟡 待确认</div>
-        <h4>QQ标签合作可行性</h4>
-        <p>QQ平台目前未提供诈骗判定数据，安全侧可推动但结果待定</p>
-      </div>
-      <div class="risk-card medium">
-        <div class="risk-label">🟡 待确认</div>
-        <h4>联系方式拦截的取舍</h4>
-        <p>全面拦截含联系方式的发言可遏制引流，但会损失正常社交体验，需项目侧决策</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">❓ 明天会上需要对齐的决策点</h3>
-      <ul class="decision-list">
-        <li class="decision-item">
-          <div class="decision-icon">1</div>
-          <div class="decision-text">
-            关键词命中精准度标准：多高的命中率可以直接执行封号？低于阈值如何处理？
-            <small>关系到 Phase 2 是自动处罚还是人工审核</small>
-          </div>
-        </li>
-        <li class="decision-item">
-          <div class="decision-icon">2</div>
-          <div class="decision-text">
-            是否启用联系方式拦截策略？能接受多大程度的正常社交误伤？
-            <small>安全侧可按规则拦截所有含联系方式的发言，但需项目侧权衡</small>
-          </div>
-        </li>
-        <li class="decision-item">
-          <div class="decision-icon">3</div>
-          <div class="decision-text">
-            封号力度的定级：永久封禁 / 临时封禁（多久）/ 禁言处理？分别适用什么场景？
-            <small>需要给安全侧明确的处罚力度预期</small>
-          </div>
-        </li>
-        <li class="decision-item">
-          <div class="decision-icon">4</div>
-          <div class="decision-text">
-            社区征集帖的发布时间和渠道覆盖确认
-            <small>掌炫贴吧 / 小红书 / QQ群 / 游戏内公告？是否需要模板统一？</small>
-          </div>
-        </li>
-        <li class="decision-item">
-          <div class="decision-icon">5</div>
-          <div class="decision-text">
-            之前安全侧同步的UGC环境优化建议，游戏侧评估结论？
-            <small>田心提到此前已同步过优化建议，需确认推进状态</small>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
+<!-- 头部 -->
+<div class="header">
+  <div>
+    <span class="tag">X51 · 运营调研</span>
+    <span class="tag">数据来源：腾讯问卷</span>
+    <span class="tag" id="meta-sample"></span>
+  </div>
+  <div class="h1">QQ炫舞 · 64位客户端体验调研报告</div>
+  <div class="h-sub" id="meta-purpose"></div>
+  <div class="kpis">
+    <div class="kpi"><div class="v" id="kpi-total">-</div><div class="k">有效样本（份）</div></div>
+    <div class="kpi"><div class="v" id="kpi-uniq">-</div><div class="k">去重玩家（QQ）</div></div>
+    <div class="kpi"><div class="v" id="kpi-aware">-</div><div class="k">64位感知率</div></div>
+    <div class="kpi"><div class="v" id="kpi-pos">-</div><div class="k">体验评价为正面</div></div>
+  </div>
 </div>
 
-<footer class="footer">
-  QQ炫舞 游戏环境反诈专项治理 · 内部会议材料 · 2026年4月17日
-</footer>
+<!-- 数据质量声明 -->
+<div class="card">
+  <h3>📋 数据清洗与质量自查（必读）</h3>
+  <div class="desc">确保每一个结论的口径清晰、数据可追溯</div>
+  <ul style="margin:8px 0;padding-left:20px;font-size:13px;color:#cfd6ff">
+    <li><b>原始样本 4806 份</b>，答题时长中位数 97 秒，最短 20 秒 — 无"秒速作答"异常样本，<b>全部纳入分析</b>。</li>
+    <li><b>去重后玩家 4611 个</b>（QQ号去重）；376 份为同一玩家多次提交，本报告以"问卷份数"为默认口径。</li>
+    <li><b>问卷跳转逻辑 100% 一致</b>：Q3"有好转"→ 100% 填 Q4；Q3"更差"→ 100% 填 Q5；Q3"没感觉"→ Q4/Q5 均为空（直接 Q6）。</li>
+    <li><b>Q4 分母 = 1397（仅体验有好转人群）</b>；<b>Q5 分母 = 699（仅体验更差人群）</b>；切勿用全量分母。</li>
+    <li><b>Q7/Q8/Q9 场景分析采用"聚焦口径"</b>：只统计 Q6 勾选了对应痛点（崩溃 1681 / 加载 1478 / 卡顿 1696）的子样本，避免未遭遇痛点的人稀释结论。</li>
+  </ul>
+</div>
 
+<!-- 目的1 -->
+<div class="section">
+  <div class="section-title"><span class="num">目的1</span>64位客户端感知情况与体验评价</div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>64位升级 · 感知率（Q2）</h3>
+      <div class="desc">分母：全部样本 n=4806</div>
+      <div id="c-q2" class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>64位升级 · 体验评价分布（Q3）</h3>
+      <div class="desc">分母：全部样本 n=4806</div>
+      <div id="c-q3" class="chart"></div>
+    </div>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:16px">
+    <div class="card">
+      <h3>✅ 哪些地方变好了（Q4）</h3>
+      <div class="desc" id="q4-desc"></div>
+      <div id="c-q4" class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>⚠️ 哪些地方变差了（Q5）</h3>
+      <div class="desc" id="q5-desc"></div>
+      <div id="c-q5" class="chart"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>🔀 感知 × 体验评价 交叉</h3>
+    <div class="desc">"看到了升级"的玩家是否比"没太注意"的玩家评价更正面？</div>
+    <div id="c-q2q3" class="chart chart-lg"></div>
+  </div>
+
+  <div class="insight">
+    <h4>🎯 目的1 核心结论</h4>
+    <ul id="insight-1"></ul>
+  </div>
+</div>
+
+<!-- 目的2 -->
+<div class="section">
+  <div class="section-title"><span class="num">目的2</span>内存升级后剩余的核心性能痛点（针对性优化线索）</div>
+
+  <div class="card">
+    <h3>🔥 Q6 游戏内最让玩家不舒服的点（总体）</h3>
+    <div class="desc">分母：全部样本 n=4806 · 多选题</div>
+    <div id="c-q6" class="chart chart-lg"></div>
+  </div>
+
+  <div class="grid grid-3" style="margin-top:16px">
+    <div class="card">
+      <h3>💥 崩溃场景 TOP（Q7）</h3>
+      <div class="desc" id="q7-desc"></div>
+      <div id="c-q7" class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>⏳ 加载场景 TOP（Q8）</h3>
+      <div class="desc" id="q8-desc"></div>
+      <div id="c-q8" class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>🐌 卡顿场景 TOP（Q9）</h3>
+      <div class="desc" id="q9-desc"></div>
+      <div id="c-q9" class="chart"></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <h4>🎯 目的2 核心结论</h4>
+    <ul id="insight-2"></ul>
+  </div>
+</div>
+
+<!-- 人群分层 -->
+<div class="section">
+  <div class="section-title"><span class="num">分层</span>按人群划分的关注重点与场景</div>
+
+  <!-- 活跃度 × 体验评价 矩阵 -->
+  <div class="card">
+    <h3>矩阵视图：活跃度 × 体验评价</h3>
+    <div class="desc">每格显示该活跃度人群中对应评价的占比，颜色越深代表该格越突出</div>
+    <div id="c-heat" class="chart chart-lg"></div>
+  </div>
+
+  <!-- 按活跃度 -->
+  <div class="card" style="margin-top:16px">
+    <h3>👥 按活跃度分层 · 痛点雷达（Q6核心痛点%）</h3>
+    <div class="desc">从雷达轮廓可一眼看出不同活跃度人群的痛点结构差异</div>
+    <div id="c-radar-q1" class="chart chart-lg"></div>
+  </div>
+
+  <!-- 按体验评价 -->
+  <div class="card" style="margin-top:16px">
+    <h3>🧩 按体验评价分层 · 痛点雷达（Q6核心痛点%）</h3>
+    <div class="desc">"体验更差"群体在哪些痛点上的勾选率远超其他群体？针对性优化看这里</div>
+    <div id="c-radar-q3" class="chart chart-lg"></div>
+  </div>
+
+  <!-- 分人群场景总览（切换 tab） -->
+  <div class="card" style="margin-top:16px">
+    <h3>🎬 分人群 · 三大痛点的高发场景</h3>
+    <div class="desc">切换人群，查看该人群在崩溃/加载/卡顿上的场景TOP</div>
+    <div class="tabs" id="tabs-seg">
+      <div class="tab active" data-seg="一直在玩">一直在玩</div>
+      <div class="tab" data-seg="之前玩过，最近刚回来玩">回流（刚回来）</div>
+      <div class="tab" data-seg="之前玩过，现在不怎么玩了">流失候选（不怎么玩了）</div>
+    </div>
+    <div class="grid grid-3">
+      <div><div id="c-seg-crash" class="chart"></div></div>
+      <div><div id="c-seg-load" class="chart"></div></div>
+      <div><div id="c-seg-lag" class="chart"></div></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <h4>🎯 分层关键洞察</h4>
+    <ul id="insight-3"></ul>
+  </div>
+</div>
+
+<!-- 建议 -->
+<div class="section">
+  <div class="section-title"><span class="num">建议</span>针对性优化优先级建议</div>
+  <div class="card">
+    <h3>🚀 基于数据的运营/研发协同优化清单</h3>
+    <table class="table" style="margin-top:10px">
+      <thead><tr><th style="width:60px">优先级</th><th style="width:160px">主题</th><th>数据依据</th><th>建议动作</th></tr></thead>
+      <tbody id="tbl-action"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  本报告由 QQ炫舞运营团队基于腾讯问卷原始数据生成 · 数据口径已在顶部"数据清洗与质量自查"中声明
+</div>
+</div>
+
+<script>
+const DATA = {"meta": {"样本总数": 4806, "QQ去重玩家数": 4611, "答题时长中位数_秒": 97, "数据来源": "腾讯问卷 · X51-64位客户端体验调研", "调研目的": ["目的1：调研64位客户端的感知情况及使用体验", "目的2：内存升级后，目前游戏内还有哪些玩家比较关注的性能体验问题，辅助针对性优化"], "数据脱敏说明": "本报告仅包含聚合统计结果；不含任何个人信息（QQ号/IP/UA/设备型号/具体省市/大区名等已全部剥离）。", "对外分享版": true}, "purpose1": {"Q2_64位感知率": [{"label": "看到了", "raw": "A.看到了", "count": 3016, "pct": 62.75}, {"label": "没太注意", "raw": "B.没太注意", "count": 1790, "pct": 37.25}], "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 2710, "pct": 56.39}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 1397, "pct": 29.07}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 699, "pct": 14.54}], "Q4_好转点": [{"label": "崩溃、闪退问题变少了", "count": 839, "pct": 60.06}, {"label": "卡顿改善，更流畅了", "count": 748, "pct": 53.54}, {"label": "loading时间更快了", "count": 409, "pct": 29.28}, {"label": "其他", "count": 28, "pct": 2.0}], "Q4_分母": 1397, "Q5_恶化点": [{"label": "卡顿更严重了", "count": 472, "pct": 67.53}, {"label": "玩不了，登录就崩溃/闪退", "count": 304, "pct": 43.49}, {"label": "loading时间变慢了", "count": 205, "pct": 29.33}, {"label": "其他", "count": 138, "pct": 19.74}], "Q5_分母": 699, "感知_x_体验评价": {"看到了": {"n": 3016, "dist": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 1283, "pct": 42.54}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 1215, "pct": 40.29}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 518, "pct": 17.18}]}, "没太注意": {"n": 1790, "dist": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 1427, "pct": 79.72}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 182, "pct": 10.17}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 181, "pct": 10.11}]}}}, "purpose2": {"Q6_核心痛点_总体": [{"label": "画面卡顿、掉帧严重", "count": 1696, "pct": 35.29}, {"label": "经常崩溃、闪退", "count": 1681, "pct": 34.98}, {"label": "角色穿模等表现问题", "count": 1627, "pct": 33.85}, {"label": "加载时间/loading时间太长", "count": 1478, "pct": 30.75}, {"label": "网络延迟严重", "count": 868, "pct": 18.06}, {"label": "都挺好，没感觉", "count": 804, "pct": 16.73}, {"label": "界面交互僵硬，不流畅", "count": 675, "pct": 14.04}, {"label": "其他", "count": 329, "pct": 6.85}], "Q7_崩溃场景": [{"label": "房间内", "count": 740, "pct": 44.02}, {"label": "游戏中", "count": 696, "pct": 41.4}, {"label": "客户端多开", "count": 616, "pct": 36.64}, {"label": "背包", "count": 510, "pct": 30.34}, {"label": "游戏大厅/房间列表", "count": 470, "pct": 27.96}, {"label": "登录游戏", "count": 451, "pct": 26.83}, {"label": "世界地图", "count": 204, "pct": 12.14}, {"label": "商城", "count": 157, "pct": 9.34}, {"label": "幸运城", "count": 130, "pct": 7.73}, {"label": "其他", "count": 123, "pct": 7.32}, {"label": "仙灵幻境", "count": 111, "pct": 6.6}, {"label": "浪漫海滩", "count": 47, "pct": 2.8}, {"label": "荣耀排位赛", "count": 46, "pct": 2.74}, {"label": "特惠活动", "count": 33, "pct": 1.96}, {"label": "炫宠擂台", "count": 31, "pct": 1.84}, {"label": "都挺好，没感觉", "count": 25, "pct": 1.49}, {"label": "福利活动", "count": 24, "pct": 1.43}, {"label": "我的家", "count": 16, "pct": 0.95}, {"label": "名人堂", "count": 11, "pct": 0.65}, {"label": "邮件系统", "count": 7, "pct": 0.42}], "Q7_分母_勾选崩溃": 1681, "Q8_加载场景": [{"label": "登录游戏", "count": 997, "pct": 67.46}, {"label": "游戏中", "count": 558, "pct": 37.75}, {"label": "房间内", "count": 373, "pct": 25.24}, {"label": "游戏大厅/房间列表", "count": 369, "pct": 24.97}, {"label": "世界地图", "count": 349, "pct": 23.61}, {"label": "背包", "count": 335, "pct": 22.67}, {"label": "商城", "count": 153, "pct": 10.35}, {"label": "仙灵幻境", "count": 141, "pct": 9.54}, {"label": "幸运城", "count": 108, "pct": 7.31}, {"label": "浪漫海滩", "count": 86, "pct": 5.82}, {"label": "荣耀排位赛", "count": 49, "pct": 3.32}, {"label": "都挺好，没感觉", "count": 47, "pct": 3.18}, {"label": "炫宠擂台", "count": 31, "pct": 2.1}, {"label": "福利活动", "count": 27, "pct": 1.83}, {"label": "其他", "count": 27, "pct": 1.83}, {"label": "特惠活动", "count": 25, "pct": 1.69}, {"label": "名人堂", "count": 14, "pct": 0.95}, {"label": "我的家", "count": 12, "pct": 0.81}, {"label": "邮件系统", "count": 8, "pct": 0.54}], "Q8_分母_勾选加载": 1478, "Q9_卡顿场景": [{"label": "游戏中", "count": 798, "pct": 47.05}, {"label": "房间内", "count": 708, "pct": 41.75}, {"label": "登录游戏", "count": 646, "pct": 38.09}, {"label": "客户端多开", "count": 640, "pct": 37.74}, {"label": "游戏大厅/房间列表", "count": 476, "pct": 28.07}, {"label": "背包", "count": 454, "pct": 26.77}, {"label": "世界地图", "count": 340, "pct": 20.05}, {"label": "商城", "count": 193, "pct": 11.38}, {"label": "仙灵幻境", "count": 119, "pct": 7.02}, {"label": "幸运城", "count": 118, "pct": 6.96}, {"label": "浪漫海滩", "count": 64, "pct": 3.77}, {"label": "都挺好，没感觉", "count": 46, "pct": 2.71}, {"label": "其他", "count": 43, "pct": 2.54}, {"label": "福利活动", "count": 35, "pct": 2.06}, {"label": "荣耀排位赛", "count": 30, "pct": 1.77}, {"label": "特惠活动", "count": 30, "pct": 1.77}, {"label": "炫宠擂台", "count": 21, "pct": 1.24}, {"label": "名人堂", "count": 18, "pct": 1.06}, {"label": "我的家", "count": 15, "pct": 0.88}, {"label": "邮件系统", "count": 10, "pct": 0.59}], "Q9_分母_勾选卡顿": 1696}, "segments": {"by_activity_Q1": {"一直在玩": {"n": 2744, "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 1349, "pct": 49.16}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 916, "pct": 33.38}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 479, "pct": 17.46}], "Q6_核心痛点": [{"label": "经常崩溃、闪退", "count": 1089, "pct": 39.69}, {"label": "画面卡顿、掉帧严重", "count": 1012, "pct": 36.88}, {"label": "角色穿模等表现问题", "count": 975, "pct": 35.53}, {"label": "加载时间/loading时间太长", "count": 854, "pct": 31.12}, {"label": "网络延迟严重", "count": 496, "pct": 18.08}, {"label": "都挺好，没感觉", "count": 401, "pct": 14.61}, {"label": "界面交互僵硬，不流畅", "count": 366, "pct": 13.34}, {"label": "其他", "count": 164, "pct": 5.98}], "崩溃场景_n": 1089, "崩溃场景": [{"label": "房间内", "count": 512, "pct": 47.02}, {"label": "游戏中", "count": 462, "pct": 42.42}, {"label": "客户端多开", "count": 402, "pct": 36.91}, {"label": "背包", "count": 364, "pct": 33.43}, {"label": "游戏大厅/房间列表", "count": 291, "pct": 26.72}, {"label": "登录游戏", "count": 283, "pct": 25.99}, {"label": "世界地图", "count": 116, "pct": 10.65}, {"label": "商城", "count": 97, "pct": 8.91}], "加载场景_n": 854, "加载场景": [{"label": "登录游戏", "count": 576, "pct": 67.45}, {"label": "游戏中", "count": 327, "pct": 38.29}, {"label": "房间内", "count": 243, "pct": 28.45}, {"label": "背包", "count": 216, "pct": 25.29}, {"label": "世界地图", "count": 205, "pct": 24.0}, {"label": "游戏大厅/房间列表", "count": 202, "pct": 23.65}, {"label": "商城", "count": 94, "pct": 11.01}, {"label": "仙灵幻境", "count": 84, "pct": 9.84}], "卡顿场景_n": 1012, "卡顿场景": [{"label": "游戏中", "count": 513, "pct": 50.69}, {"label": "房间内", "count": 460, "pct": 45.45}, {"label": "客户端多开", "count": 398, "pct": 39.33}, {"label": "登录游戏", "count": 371, "pct": 36.66}, {"label": "游戏大厅/房间列表", "count": 302, "pct": 29.84}, {"label": "背包", "count": 302, "pct": 29.84}, {"label": "世界地图", "count": 194, "pct": 19.17}, {"label": "商城", "count": 120, "pct": 11.86}], "好转点": [{"label": "崩溃、闪退问题变少了", "count": 581, "pct": 63.43}, {"label": "卡顿改善，更流畅了", "count": 467, "pct": 50.98}, {"label": "loading时间更快了", "count": 275, "pct": 30.02}, {"label": "其他", "count": 16, "pct": 1.75}], "好转点_n": 916, "恶化点": [{"label": "卡顿更严重了", "count": 333, "pct": 69.52}, {"label": "玩不了，登录就崩溃/闪退", "count": 211, "pct": 44.05}, {"label": "loading时间变慢了", "count": 131, "pct": 27.35}, {"label": "其他", "count": 94, "pct": 19.62}], "恶化点_n": 479}, "之前玩过，最近刚回来玩": {"n": 1213, "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 744, "pct": 61.34}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 358, "pct": 29.51}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 111, "pct": 9.15}], "Q6_核心痛点": [{"label": "画面卡顿、掉帧严重", "count": 393, "pct": 32.4}, {"label": "角色穿模等表现问题", "count": 357, "pct": 29.43}, {"label": "加载时间/loading时间太长", "count": 353, "pct": 29.1}, {"label": "经常崩溃、闪退", "count": 341, "pct": 28.11}, {"label": "都挺好，没感觉", "count": 250, "pct": 20.61}, {"label": "网络延迟严重", "count": 202, "pct": 16.65}, {"label": "界面交互僵硬，不流畅", "count": 181, "pct": 14.92}, {"label": "其他", "count": 83, "pct": 6.84}], "崩溃场景_n": 341, "崩溃场景": [{"label": "游戏中", "count": 128, "pct": 37.54}, {"label": "房间内", "count": 123, "pct": 36.07}, {"label": "客户端多开", "count": 108, "pct": 31.67}, {"label": "游戏大厅/房间列表", "count": 102, "pct": 29.91}, {"label": "登录游戏", "count": 88, "pct": 25.81}, {"label": "背包", "count": 69, "pct": 20.23}, {"label": "世界地图", "count": 41, "pct": 12.02}, {"label": "商城", "count": 33, "pct": 9.68}], "加载场景_n": 353, "加载场景": [{"label": "登录游戏", "count": 226, "pct": 64.02}, {"label": "游戏中", "count": 133, "pct": 37.68}, {"label": "游戏大厅/房间列表", "count": 70, "pct": 19.83}, {"label": "房间内", "count": 69, "pct": 19.55}, {"label": "世界地图", "count": 64, "pct": 18.13}, {"label": "背包", "count": 53, "pct": 15.01}, {"label": "商城", "count": 30, "pct": 8.5}, {"label": "仙灵幻境", "count": 30, "pct": 8.5}], "卡顿场景_n": 393, "卡顿场景": [{"label": "游戏中", "count": 163, "pct": 41.48}, {"label": "登录游戏", "count": 146, "pct": 37.15}, {"label": "客户端多开", "count": 138, "pct": 35.11}, {"label": "房间内", "count": 136, "pct": 34.61}, {"label": "游戏大厅/房间列表", "count": 88, "pct": 22.39}, {"label": "世界地图", "count": 72, "pct": 18.32}, {"label": "背包", "count": 69, "pct": 17.56}, {"label": "商城", "count": 35, "pct": 8.91}], "好转点": [{"label": "卡顿改善，更流畅了", "count": 221, "pct": 61.73}, {"label": "崩溃、闪退问题变少了", "count": 184, "pct": 51.4}, {"label": "loading时间更快了", "count": 101, "pct": 28.21}, {"label": "其他", "count": 8, "pct": 2.23}], "好转点_n": 358, "恶化点": [{"label": "卡顿更严重了", "count": 70, "pct": 63.06}, {"label": "玩不了，登录就崩溃/闪退", "count": 37, "pct": 33.33}, {"label": "loading时间变慢了", "count": 37, "pct": 33.33}, {"label": "其他", "count": 24, "pct": 21.62}], "恶化点_n": 111}, "之前玩过，现在不怎么玩了": {"n": 784, "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 581, "pct": 74.11}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 104, "pct": 13.27}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 99, "pct": 12.63}], "Q6_核心痛点": [{"label": "角色穿模等表现问题", "count": 277, "pct": 35.33}, {"label": "画面卡顿、掉帧严重", "count": 271, "pct": 34.57}, {"label": "加载时间/loading时间太长", "count": 258, "pct": 32.91}, {"label": "经常崩溃、闪退", "count": 225, "pct": 28.7}, {"label": "网络延迟严重", "count": 159, "pct": 20.28}, {"label": "都挺好，没感觉", "count": 138, "pct": 17.6}, {"label": "界面交互僵硬，不流畅", "count": 119, "pct": 15.18}, {"label": "其他", "count": 80, "pct": 10.2}], "崩溃场景_n": 225, "崩溃场景": [{"label": "游戏中", "count": 100, "pct": 44.44}, {"label": "房间内", "count": 96, "pct": 42.67}, {"label": "客户端多开", "count": 94, "pct": 41.78}, {"label": "登录游戏", "count": 71, "pct": 31.56}, {"label": "游戏大厅/房间列表", "count": 71, "pct": 31.56}, {"label": "背包", "count": 69, "pct": 30.67}, {"label": "世界地图", "count": 41, "pct": 18.22}, {"label": "商城", "count": 26, "pct": 11.56}], "加载场景_n": 258, "加载场景": [{"label": "登录游戏", "count": 186, "pct": 72.09}, {"label": "游戏中", "count": 95, "pct": 36.82}, {"label": "游戏大厅/房间列表", "count": 92, "pct": 35.66}, {"label": "世界地图", "count": 76, "pct": 29.46}, {"label": "背包", "count": 61, "pct": 23.64}, {"label": "房间内", "count": 57, "pct": 22.09}, {"label": "商城", "count": 28, "pct": 10.85}, {"label": "幸运城", "count": 23, "pct": 8.91}], "卡顿场景_n": 271, "卡顿场景": [{"label": "登录游戏", "count": 120, "pct": 44.28}, {"label": "游戏中", "count": 113, "pct": 41.7}, {"label": "房间内", "count": 106, "pct": 39.11}, {"label": "客户端多开", "count": 99, "pct": 36.53}, {"label": "背包", "count": 78, "pct": 28.78}, {"label": "游戏大厅/房间列表", "count": 77, "pct": 28.41}, {"label": "世界地图", "count": 70, "pct": 25.83}, {"label": "商城", "count": 36, "pct": 13.28}], "好转点": [{"label": "崩溃、闪退问题变少了", "count": 61, "pct": 58.65}, {"label": "卡顿改善，更流畅了", "count": 51, "pct": 49.04}, {"label": "loading时间更快了", "count": 30, "pct": 28.85}, {"label": "其他", "count": 2, "pct": 1.92}], "好转点_n": 104, "恶化点": [{"label": "卡顿更严重了", "count": 65, "pct": 65.66}, {"label": "玩不了，登录就崩溃/闪退", "count": 52, "pct": 52.53}, {"label": "loading时间变慢了", "count": 33, "pct": 33.33}, {"label": "其他", "count": 19, "pct": 19.19}], "恶化点_n": 99}, "之前没玩过，最近刚开始玩": {"n": 65, "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 36, "pct": 55.38}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 19, "pct": 29.23}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 10, "pct": 15.38}], "Q6_核心痛点": [{"label": "经常崩溃、闪退", "count": 26, "pct": 40.0}, {"label": "画面卡顿、掉帧严重", "count": 20, "pct": 30.77}, {"label": "角色穿模等表现问题", "count": 18, "pct": 27.69}, {"label": "都挺好，没感觉", "count": 15, "pct": 23.08}, {"label": "加载时间/loading时间太长", "count": 13, "pct": 20.0}, {"label": "网络延迟严重", "count": 11, "pct": 16.92}, {"label": "界面交互僵硬，不流畅", "count": 9, "pct": 13.85}, {"label": "其他", "count": 2, "pct": 3.08}], "崩溃场景_n": 26, "崩溃场景": [{"label": "客户端多开", "count": 12, "pct": 46.15}, {"label": "登录游戏", "count": 9, "pct": 34.62}, {"label": "房间内", "count": 9, "pct": 34.62}, {"label": "背包", "count": 8, "pct": 30.77}, {"label": "世界地图", "count": 6, "pct": 23.08}, {"label": "游戏大厅/房间列表", "count": 6, "pct": 23.08}, {"label": "游戏中", "count": 6, "pct": 23.08}, {"label": "仙灵幻境", "count": 3, "pct": 11.54}], "加载场景_n": 13, "加载场景": [{"label": "登录游戏", "count": 9, "pct": 69.23}, {"label": "游戏大厅/房间列表", "count": 5, "pct": 38.46}, {"label": "背包", "count": 5, "pct": 38.46}, {"label": "世界地图", "count": 4, "pct": 30.77}, {"label": "房间内", "count": 4, "pct": 30.77}, {"label": "仙灵幻境", "count": 4, "pct": 30.77}, {"label": "游戏中", "count": 3, "pct": 23.08}, {"label": "幸运城", "count": 2, "pct": 15.38}], "卡顿场景_n": 20, "卡顿场景": [{"label": "登录游戏", "count": 9, "pct": 45.0}, {"label": "游戏大厅/房间列表", "count": 9, "pct": 45.0}, {"label": "游戏中", "count": 9, "pct": 45.0}, {"label": "房间内", "count": 6, "pct": 30.0}, {"label": "客户端多开", "count": 5, "pct": 25.0}, {"label": "背包", "count": 5, "pct": 25.0}, {"label": "世界地图", "count": 4, "pct": 20.0}, {"label": "幸运城", "count": 3, "pct": 15.0}]}}, "by_experience_Q3": {"体验有好转": {"n": 1397, "Q3_体验评价": [{"label": "体验有好转", "raw": "A.体验有好转", "count": 1397, "pct": 100.0}], "Q6_核心痛点": [{"label": "角色穿模等表现问题", "count": 435, "pct": 31.14}, {"label": "经常崩溃、闪退", "count": 406, "pct": 29.06}, {"label": "画面卡顿、掉帧严重", "count": 403, "pct": 28.85}, {"label": "加载时间/loading时间太长", "count": 386, "pct": 27.63}, {"label": "都挺好，没感觉", "count": 318, "pct": 22.76}, {"label": "网络延迟严重", "count": 221, "pct": 15.82}, {"label": "界面交互僵硬，不流畅", "count": 184, "pct": 13.17}, {"label": "其他", "count": 57, "pct": 4.08}], "崩溃场景_n": 406, "崩溃场景": [{"label": "客户端多开", "count": 197, "pct": 48.52}, {"label": "游戏中", "count": 133, "pct": 32.76}, {"label": "登录游戏", "count": 128, "pct": 31.53}, {"label": "房间内", "count": 127, "pct": 31.28}, {"label": "背包", "count": 90, "pct": 22.17}, {"label": "游戏大厅/房间列表", "count": 88, "pct": 21.67}, {"label": "世界地图", "count": 60, "pct": 14.78}, {"label": "幸运城", "count": 35, "pct": 8.62}], "加载场景_n": 386, "加载场景": [{"label": "登录游戏", "count": 261, "pct": 67.62}, {"label": "游戏中", "count": 115, "pct": 29.79}, {"label": "世界地图", "count": 101, "pct": 26.17}, {"label": "游戏大厅/房间列表", "count": 79, "pct": 20.47}, {"label": "房间内", "count": 76, "pct": 19.69}, {"label": "背包", "count": 62, "pct": 16.06}, {"label": "仙灵幻境", "count": 46, "pct": 11.92}, {"label": "浪漫海滩", "count": 30, "pct": 7.77}], "卡顿场景_n": 403, "卡顿场景": [{"label": "客户端多开", "count": 173, "pct": 42.93}, {"label": "登录游戏", "count": 144, "pct": 35.73}, {"label": "游戏中", "count": 132, "pct": 32.75}, {"label": "房间内", "count": 128, "pct": 31.76}, {"label": "游戏大厅/房间列表", "count": 102, "pct": 25.31}, {"label": "世界地图", "count": 92, "pct": 22.83}, {"label": "背包", "count": 85, "pct": 21.09}, {"label": "商城", "count": 39, "pct": 9.68}], "好转点": [{"label": "崩溃、闪退问题变少了", "count": 839, "pct": 60.06}, {"label": "卡顿改善，更流畅了", "count": 748, "pct": 53.54}, {"label": "loading时间更快了", "count": 409, "pct": 29.28}, {"label": "其他", "count": 28, "pct": 2.0}], "好转点_n": 1397}, "没什么感觉": {"n": 2710, "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 2710, "pct": 100.0}], "Q6_核心痛点": [{"label": "角色穿模等表现问题", "count": 981, "pct": 36.2}, {"label": "画面卡顿、掉帧严重", "count": 917, "pct": 33.84}, {"label": "经常崩溃、闪退", "count": 873, "pct": 32.21}, {"label": "加载时间/loading时间太长", "count": 854, "pct": 31.51}, {"label": "网络延迟严重", "count": 473, "pct": 17.45}, {"label": "都挺好，没感觉", "count": 467, "pct": 17.23}, {"label": "界面交互僵硬，不流畅", "count": 363, "pct": 13.39}, {"label": "其他", "count": 213, "pct": 7.86}], "崩溃场景_n": 873, "崩溃场景": [{"label": "房间内", "count": 397, "pct": 45.48}, {"label": "游戏中", "count": 377, "pct": 43.18}, {"label": "客户端多开", "count": 303, "pct": 34.71}, {"label": "背包", "count": 262, "pct": 30.01}, {"label": "游戏大厅/房间列表", "count": 239, "pct": 27.38}, {"label": "登录游戏", "count": 219, "pct": 25.09}, {"label": "世界地图", "count": 91, "pct": 10.42}, {"label": "商城", "count": 81, "pct": 9.28}], "加载场景_n": 854, "加载场景": [{"label": "登录游戏", "count": 582, "pct": 68.15}, {"label": "游戏中", "count": 318, "pct": 37.24}, {"label": "游戏大厅/房间列表", "count": 220, "pct": 25.76}, {"label": "房间内", "count": 200, "pct": 23.42}, {"label": "世界地图", "count": 193, "pct": 22.6}, {"label": "背包", "count": 191, "pct": 22.37}, {"label": "商城", "count": 90, "pct": 10.54}, {"label": "仙灵幻境", "count": 83, "pct": 9.72}], "卡顿场景_n": 917, "卡顿场景": [{"label": "游戏中", "count": 441, "pct": 48.09}, {"label": "房间内", "count": 367, "pct": 40.02}, {"label": "登录游戏", "count": 352, "pct": 38.39}, {"label": "客户端多开", "count": 334, "pct": 36.42}, {"label": "背包", "count": 236, "pct": 25.74}, {"label": "游戏大厅/房间列表", "count": 225, "pct": 24.54}, {"label": "世界地图", "count": 173, "pct": 18.87}, {"label": "商城", "count": 110, "pct": 12.0}]}, "体验更差了": {"n": 699, "Q3_体验评价": [{"label": "体验更差了", "raw": "C.体验更差了", "count": 699, "pct": 100.0}], "Q6_核心痛点": [{"label": "经常崩溃、闪退", "count": 402, "pct": 57.51}, {"label": "画面卡顿、掉帧严重", "count": 376, "pct": 53.79}, {"label": "加载时间/loading时间太长", "count": 238, "pct": 34.05}, {"label": "角色穿模等表现问题", "count": 211, "pct": 30.19}, {"label": "网络延迟严重", "count": 174, "pct": 24.89}, {"label": "界面交互僵硬，不流畅", "count": 128, "pct": 18.31}, {"label": "其他", "count": 59, "pct": 8.44}, {"label": "都挺好，没感觉", "count": 19, "pct": 2.72}], "崩溃场景_n": 402, "崩溃场景": [{"label": "房间内", "count": 216, "pct": 53.73}, {"label": "游戏中", "count": 186, "pct": 46.27}, {"label": "背包", "count": 158, "pct": 39.3}, {"label": "游戏大厅/房间列表", "count": 143, "pct": 35.57}, {"label": "客户端多开", "count": 116, "pct": 28.86}, {"label": "登录游戏", "count": 104, "pct": 25.87}, {"label": "世界地图", "count": 53, "pct": 13.18}, {"label": "商城", "count": 50, "pct": 12.44}], "加载场景_n": 238, "加载场景": [{"label": "登录游戏", "count": 154, "pct": 64.71}, {"label": "游戏中", "count": 125, "pct": 52.52}, {"label": "房间内", "count": 97, "pct": 40.76}, {"label": "背包", "count": 82, "pct": 34.45}, {"label": "游戏大厅/房间列表", "count": 70, "pct": 29.41}, {"label": "世界地图", "count": 55, "pct": 23.11}, {"label": "商城", "count": 35, "pct": 14.71}, {"label": "幸运城", "count": 25, "pct": 10.5}], "卡顿场景_n": 376, "卡顿场景": [{"label": "游戏中", "count": 225, "pct": 59.84}, {"label": "房间内", "count": 213, "pct": 56.65}, {"label": "登录游戏", "count": 150, "pct": 39.89}, {"label": "游戏大厅/房间列表", "count": 149, "pct": 39.63}, {"label": "客户端多开", "count": 133, "pct": 35.37}, {"label": "背包", "count": 133, "pct": 35.37}, {"label": "世界地图", "count": 75, "pct": 19.95}, {"label": "商城", "count": 44, "pct": 11.7}], "恶化点": [{"label": "卡顿更严重了", "count": 472, "pct": 67.53}, {"label": "玩不了，登录就崩溃/闪退", "count": 304, "pct": 43.49}, {"label": "loading时间变慢了", "count": 205, "pct": 29.33}, {"label": "其他", "count": 138, "pct": 19.74}], "恶化点_n": 699}}, "by_awareness_Q2": {"看到了": {"n": 3016, "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 1283, "pct": 42.54}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 1215, "pct": 40.29}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 518, "pct": 17.18}], "Q6_核心痛点": [{"label": "经常崩溃、闪退", "count": 1195, "pct": 39.62}, {"label": "画面卡顿、掉帧严重", "count": 1130, "pct": 37.47}, {"label": "角色穿模等表现问题", "count": 1072, "pct": 35.54}, {"label": "加载时间/loading时间太长", "count": 899, "pct": 29.81}, {"label": "网络延迟严重", "count": 539, "pct": 17.87}, {"label": "都挺好，没感觉", "count": 451, "pct": 14.95}, {"label": "界面交互僵硬，不流畅", "count": 410, "pct": 13.59}, {"label": "其他", "count": 174, "pct": 5.77}], "崩溃场景_n": 1195, "崩溃场景": [{"label": "房间内", "count": 559, "pct": 46.78}, {"label": "游戏中", "count": 502, "pct": 42.01}, {"label": "客户端多开", "count": 453, "pct": 37.91}, {"label": "背包", "count": 370, "pct": 30.96}, {"label": "游戏大厅/房间列表", "count": 343, "pct": 28.7}, {"label": "登录游戏", "count": 311, "pct": 26.03}, {"label": "世界地图", "count": 148, "pct": 12.38}, {"label": "商城", "count": 102, "pct": 8.54}], "加载场景_n": 899, "加载场景": [{"label": "登录游戏", "count": 602, "pct": 66.96}, {"label": "游戏中", "count": 361, "pct": 40.16}, {"label": "房间内", "count": 252, "pct": 28.03}, {"label": "游戏大厅/房间列表", "count": 221, "pct": 24.58}, {"label": "背包", "count": 219, "pct": 24.36}, {"label": "世界地图", "count": 201, "pct": 22.36}, {"label": "商城", "count": 93, "pct": 10.34}, {"label": "仙灵幻境", "count": 87, "pct": 9.68}], "卡顿场景_n": 1130, "卡顿场景": [{"label": "游戏中", "count": 558, "pct": 49.38}, {"label": "房间内", "count": 497, "pct": 43.98}, {"label": "客户端多开", "count": 447, "pct": 39.56}, {"label": "登录游戏", "count": 393, "pct": 34.78}, {"label": "游戏大厅/房间列表", "count": 336, "pct": 29.73}, {"label": "背包", "count": 307, "pct": 27.17}, {"label": "世界地图", "count": 221, "pct": 19.56}, {"label": "商城", "count": 132, "pct": 11.68}], "好转点": [{"label": "崩溃、闪退问题变少了", "count": 762, "pct": 62.72}, {"label": "卡顿改善，更流畅了", "count": 652, "pct": 53.66}, {"label": "loading时间更快了", "count": 348, "pct": 28.64}, {"label": "其他", "count": 23, "pct": 1.89}], "好转点_n": 1215, "恶化点": [{"label": "卡顿更严重了", "count": 364, "pct": 70.27}, {"label": "玩不了，登录就崩溃/闪退", "count": 230, "pct": 44.4}, {"label": "loading时间变慢了", "count": 144, "pct": 27.8}, {"label": "其他", "count": 109, "pct": 21.04}], "恶化点_n": 518}, "没太注意": {"n": 1790, "Q3_体验评价": [{"label": "没什么感觉", "raw": "B.没什么感觉", "count": 1427, "pct": 79.72}, {"label": "体验有好转", "raw": "A.体验有好转", "count": 182, "pct": 10.17}, {"label": "体验更差了", "raw": "C.体验更差了", "count": 181, "pct": 10.11}], "Q6_核心痛点": [{"label": "加载时间/loading时间太长", "count": 579, "pct": 32.35}, {"label": "画面卡顿、掉帧严重", "count": 566, "pct": 31.62}, {"label": "角色穿模等表现问题", "count": 555, "pct": 31.01}, {"label": "经常崩溃、闪退", "count": 486, "pct": 27.15}, {"label": "都挺好，没感觉", "count": 353, "pct": 19.72}, {"label": "网络延迟严重", "count": 329, "pct": 18.38}, {"label": "界面交互僵硬，不流畅", "count": 265, "pct": 14.8}, {"label": "其他", "count": 155, "pct": 8.66}], "崩溃场景_n": 486, "崩溃场景": [{"label": "游戏中", "count": 194, "pct": 39.92}, {"label": "房间内", "count": 181, "pct": 37.24}, {"label": "客户端多开", "count": 163, "pct": 33.54}, {"label": "登录游戏", "count": 140, "pct": 28.81}, {"label": "背包", "count": 140, "pct": 28.81}, {"label": "游戏大厅/房间列表", "count": 127, "pct": 26.13}, {"label": "世界地图", "count": 56, "pct": 11.52}, {"label": "商城", "count": 55, "pct": 11.32}], "加载场景_n": 579, "加载场景": [{"label": "登录游戏", "count": 395, "pct": 68.22}, {"label": "游戏中", "count": 197, "pct": 34.02}, {"label": "世界地图", "count": 148, "pct": 25.56}, {"label": "游戏大厅/房间列表", "count": 148, "pct": 25.56}, {"label": "房间内", "count": 121, "pct": 20.9}, {"label": "背包", "count": 116, "pct": 20.03}, {"label": "商城", "count": 60, "pct": 10.36}, {"label": "仙灵幻境", "count": 54, "pct": 9.33}], "卡顿场景_n": 566, "卡顿场景": [{"label": "登录游戏", "count": 253, "pct": 44.7}, {"label": "游戏中", "count": 240, "pct": 42.4}, {"label": "房间内", "count": 211, "pct": 37.28}, {"label": "客户端多开", "count": 193, "pct": 34.1}, {"label": "背包", "count": 147, "pct": 25.97}, {"label": "游戏大厅/房间列表", "count": 140, "pct": 24.73}, {"label": "世界地图", "count": 119, "pct": 21.02}, {"label": "商城", "count": 61, "pct": 10.78}], "好转点": [{"label": "卡顿改善，更流畅了", "count": 96, "pct": 52.75}, {"label": "崩溃、闪退问题变少了", "count": 77, "pct": 42.31}, {"label": "loading时间更快了", "count": 61, "pct": 33.52}, {"label": "其他", "count": 5, "pct": 2.75}], "好转点_n": 182, "恶化点": [{"label": "卡顿更严重了", "count": 108, "pct": 59.67}, {"label": "玩不了，登录就崩溃/闪退", "count": 74, "pct": 40.88}, {"label": "loading时间变慢了", "count": 61, "pct": 33.7}, {"label": "其他", "count": 29, "pct": 16.02}], "恶化点_n": 181}}}, "cross_Q1_x_Q3": [{"q1": "一直在玩", "cells": [{"q3": "体验有好转", "count": 916, "pct_in_q1": 33.38}, {"q3": "没什么感觉", "count": 1349, "pct_in_q1": 49.16}, {"q3": "体验更差了", "count": 479, "pct_in_q1": 17.46}], "n": 2744}, {"q1": "之前玩过，最近刚回来玩", "cells": [{"q3": "体验有好转", "count": 358, "pct_in_q1": 29.51}, {"q3": "没什么感觉", "count": 744, "pct_in_q1": 61.34}, {"q3": "体验更差了", "count": 111, "pct_in_q1": 9.15}], "n": 1213}, {"q1": "之前玩过，现在不怎么玩了", "cells": [{"q3": "体验有好转", "count": 104, "pct_in_q1": 13.27}, {"q3": "没什么感觉", "count": 581, "pct_in_q1": 74.11}, {"q3": "体验更差了", "count": 99, "pct_in_q1": 12.63}], "n": 784}, {"q1": "之前没玩过，最近刚开始玩", "cells": [{"q3": "体验有好转", "count": 19, "pct_in_q1": 29.23}, {"q3": "没什么感觉", "count": 36, "pct_in_q1": 55.38}, {"q3": "体验更差了", "count": 10, "pct_in_q1": 15.38}], "n": 65}]};
+const COLORS = {
+  good:"#3ec28f", bad:"#ff6b7a", warn:"#ffb454", neutral:"#9aa4d6", accent:"#7c9cff"
+};
+// 体验评价的颜色
+const Q3_COLOR = {"体验有好转":"#3ec28f","没什么感觉":"#9aa4d6","体验更差了":"#ff6b7a"};
+
+// ============ 头部 KPI ============
+document.getElementById('meta-sample').innerText = '样本 ' + DATA.meta['样本总数'] + ' / 去重 ' + DATA.meta['QQ去重玩家数'];
+document.getElementById('meta-purpose').innerText = DATA.meta['调研目的'].join(' ｜ ');
+document.getElementById('kpi-total').innerText = DATA.meta['样本总数'].toLocaleString();
+document.getElementById('kpi-uniq').innerText  = DATA.meta['QQ去重玩家数'].toLocaleString();
+const awarePct = DATA.purpose1['Q2_64位感知率'].find(x=>x.label==='看到了').pct;
+document.getElementById('kpi-aware').innerText = awarePct + '%';
+const posPct = DATA.purpose1['Q3_体验评价'].find(x=>x.label==='体验有好转').pct;
+document.getElementById('kpi-pos').innerText = posPct + '%';
+
+function baseGrid(){return {left:'3%',right:'4%',bottom:'6%',top:'8%',containLabel:true}}
+function axisLabel(){return {color:'#cfd6ff',fontSize:11}}
+function tooltipCfg(){return {backgroundColor:'#1a2144',borderColor:'#2a3260',textStyle:{color:'#fff'}}}
+
+function pie(id, data, title, colorMap){
+  const chart = echarts.init(document.getElementById(id),'dark',{renderer:'canvas'});
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{...tooltipCfg(),trigger:'item',formatter:p=>`${p.name}<br/><b>${p.value}</b> (${p.percent}%)`},
+    legend:{bottom:0,textStyle:{color:'#cfd6ff'}},
+    series:[{type:'pie',radius:['45%','72%'],center:['50%','45%'],
+      itemStyle:{borderColor:'#141a33',borderWidth:2},
+      label:{color:'#fff',formatter:'{b}\n{d}%'},
+      data:data.map(x=>({name:x.label,value:x.count,
+        itemStyle: colorMap&&colorMap[x.label]?{color:colorMap[x.label]}:{}}))
+    }]
+  });
+  window.addEventListener('resize',()=>chart.resize());
+  return chart;
+}
+
+function hbar(id, items, color, topk){
+  if(topk) items = items.slice(0,topk);
+  const chart = echarts.init(document.getElementById(id),'dark');
+  const names = items.map(x=>x.label).reverse();
+  const pcts = items.map(x=>x.pct).reverse();
+  const counts = items.map(x=>x.count).reverse();
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{...tooltipCfg(),trigger:'axis',axisPointer:{type:'shadow'},
+      formatter:p=>`${p[0].name}<br/><b>${counts[p[0].dataIndex]}</b> 人 · <b>${p[0].value}%</b>`},
+    grid:baseGrid(),
+    xAxis:{type:'value',axisLabel:{...axisLabel(),formatter:'{value}%'},splitLine:{lineStyle:{color:'#2a3260'}}},
+    yAxis:{type:'category',data:names,axisLabel:{...axisLabel(),width:140,overflow:'truncate'}},
+    series:[{type:'bar',data:pcts,itemStyle:{color,borderRadius:[0,6,6,0]},
+      label:{show:true,position:'right',color:'#fff',formatter:p=>p.value+'%'}}]
+  });
+  window.addEventListener('resize',()=>chart.resize());
+  return chart;
+}
+
+// ========== 目的1 图表 ==========
+pie('c-q2', DATA.purpose1['Q2_64位感知率'], '感知', {"看到了":"#7c9cff","没太注意":"#9aa4d6"});
+pie('c-q3', DATA.purpose1['Q3_体验评价'], '评价', Q3_COLOR);
+
+// Q4 / Q5
+document.getElementById('q4-desc').innerText = '分母：仅"体验有好转"人群 n=' + DATA.purpose1['Q4_分母'];
+document.getElementById('q5-desc').innerText = '分母：仅"体验更差"人群 n=' + DATA.purpose1['Q5_分母'];
+hbar('c-q4', DATA.purpose1['Q4_好转点'].filter(x=>x.label!=='其他'), '#3ec28f');
+hbar('c-q5', DATA.purpose1['Q5_恶化点'].filter(x=>x.label!=='其他'), '#ff6b7a');
+
+// Q2 x Q3 堆叠条
+(function(){
+  const cats = Object.keys(DATA.purpose1['感知_x_体验评价']);
+  const q3Order = ['体验有好转','没什么感觉','体验更差了'];
+  const series = q3Order.map(q3=>({
+    name:q3, type:'bar', stack:'a',
+    itemStyle:{color:Q3_COLOR[q3]},
+    label:{show:true,color:'#fff',formatter:p=>p.value+'%'},
+    data: cats.map(c=>{
+      const d = DATA.purpose1['感知_x_体验评价'][c].dist.find(x=>x.label===q3);
+      return d?d.pct:0;
+    })
+  }));
+  const chart = echarts.init(document.getElementById('c-q2q3'),'dark');
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{...tooltipCfg(),trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{textStyle:{color:'#cfd6ff'},top:0},
+    grid:baseGrid(),
+    xAxis:{type:'category',data:cats.map(c=>{
+      const n = DATA.purpose1['感知_x_体验评价'][c].n;
+      return c+' (n='+n+')';
+    }), axisLabel:axisLabel()},
+    yAxis:{type:'value',max:100,axisLabel:{...axisLabel(),formatter:'{value}%'},splitLine:{lineStyle:{color:'#2a3260'}}},
+    series
+  });
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ========== 目的2 图表 ==========
+hbar('c-q6', DATA.purpose2['Q6_核心痛点_总体'].filter(x=>x.label!=='其他'), '#7c9cff');
+
+document.getElementById('q7-desc').innerText = '分母：n=' + DATA.purpose2['Q7_分母_勾选崩溃'];
+document.getElementById('q8-desc').innerText = '分母：n=' + DATA.purpose2['Q8_分母_勾选加载'];
+document.getElementById('q9-desc').innerText = '分母：n=' + DATA.purpose2['Q9_分母_勾选卡顿'];
+
+hbar('c-q7', DATA.purpose2['Q7_崩溃场景'].filter(x=>x.label!=='其他'&&x.label!=='都挺好，没感觉'), '#ff6b7a', 8);
+hbar('c-q8', DATA.purpose2['Q8_加载场景'].filter(x=>x.label!=='其他'&&x.label!=='都挺好，没感觉'), '#ffb454', 8);
+hbar('c-q9', DATA.purpose2['Q9_卡顿场景'].filter(x=>x.label!=='其他'&&x.label!=='都挺好，没感觉'), '#7c9cff', 8);
+
+// ========== 分层：活跃度 x 体验评价 热力矩阵 ==========
+(function(){
+  const rows = DATA['cross_Q1_x_Q3'];
+  const xCats = rows[0].cells.map(c=>c.q3);
+  const yCats = rows.map(r=>r.q1);
+  const data = [];
+  rows.forEach((r,ri)=>{
+    r.cells.forEach((c,ci)=>data.push([ci,ri,c.pct_in_q1]));
+  });
+  const chart = echarts.init(document.getElementById('c-heat'),'dark');
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{...tooltipCfg(),formatter:p=>{
+      const r = rows[p.value[1]];
+      const c = r.cells[p.value[0]];
+      return `${r.q1} × ${c.q3}<br/>占该活跃度 <b>${c.pct_in_q1}%</b><br/>样本 ${c.count} / ${r.n}`;
+    }},
+    grid:{left:180,right:40,top:40,bottom:40},
+    xAxis:{type:'category',data:xCats,axisLabel:axisLabel(),position:'top'},
+    yAxis:{type:'category',data:yCats,axisLabel:{...axisLabel(),width:160,overflow:'truncate'}},
+    visualMap:{min:0,max:80,calculable:true,orient:'horizontal',left:'center',bottom:0,
+      inRange:{color:['#1a2144','#3a4a9a','#7c9cff','#ffb454','#ff6b7a']},
+      textStyle:{color:'#cfd6ff'}},
+    series:[{type:'heatmap',data,
+      label:{show:true,color:'#fff',formatter:p=>p.value[2]+'%'},
+      itemStyle:{borderColor:'#0b1020',borderWidth:1}}]
+  });
+  window.addEventListener('resize',()=>chart.resize());
+})();
+
+// ========== 痛点雷达 · 按活跃度 ==========
+function buildRadar(containerId, segData, groupKey){
+  const groups = Object.keys(segData);
+  // 固定指标（去"都挺好"和"其他"）
+  const indicators = (segData[groups[0]]['Q6_核心痛点']||[])
+    .filter(x=>x.label!=='其他'&&x.label!=='都挺好，没感觉')
+    .map(x=>x.label);
+  const indicator = indicators.map(x=>({name:x,max:60}));
+  const palette = ['#7c9cff','#3ec28f','#ffb454','#ff6b7a','#c58aff','#5fd2ff'];
+  const series = [{type:'radar',data:groups.map((g,i)=>{
+    const map = {};
+    segData[g]['Q6_核心痛点'].forEach(x=>map[x.label]=x.pct);
+    return {
+      name:g+' (n='+segData[g].n+')',
+      value:indicators.map(ind=>map[ind]||0),
+      areaStyle:{opacity:0.18},
+      lineStyle:{width:2},
+      itemStyle:{color:palette[i%palette.length]}
+    };
+  })}];
+  const chart = echarts.init(document.getElementById(containerId),'dark');
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{...tooltipCfg()},
+    legend:{textStyle:{color:'#cfd6ff'},bottom:0,type:'scroll'},
+    radar:{indicator,axisName:{color:'#cfd6ff',fontSize:11},
+      splitArea:{areaStyle:{color:['#ffffff04','#ffffff08']}},
+      splitLine:{lineStyle:{color:'#2a3260'}},
+      axisLine:{lineStyle:{color:'#2a3260'}}},
+    series
+  });
+  window.addEventListener('resize',()=>chart.resize());
+}
+buildRadar('c-radar-q1', DATA.segments.by_activity_Q1);
+buildRadar('c-radar-q3', DATA.segments.by_experience_Q3);
+
+// ========== 分人群场景 tab ==========
+let segChart = {crash:null,load:null,lag:null};
+function renderSeg(segName){
+  const s = DATA.segments.by_activity_Q1[segName];
+  if(!s) return;
+  const render = (id, items, color, title, nKey) => {
+    if(segChart[id]) segChart[id].dispose();
+    const chart = echarts.init(document.getElementById('c-seg-'+id),'dark');
+    const data = (items||[]).filter(x=>x.label!=='其他'&&x.label!=='都挺好，没感觉').slice(0,6);
+    const names = data.map(x=>x.label).reverse();
+    const pcts = data.map(x=>x.pct).reverse();
+    const counts = data.map(x=>x.count).reverse();
+    chart.setOption({
+      backgroundColor:'transparent',
+      title:{text:title+' (n='+s[nKey]+')',left:'center',textStyle:{color:'#fff',fontSize:13}},
+      tooltip:{...tooltipCfg(),trigger:'axis',formatter:p=>`${p[0].name}<br/><b>${counts[p[0].dataIndex]}</b> · ${p[0].value}%`},
+      grid:{left:'3%',right:'12%',bottom:'6%',top:'20%',containLabel:true},
+      xAxis:{type:'value',axisLabel:{...axisLabel(),formatter:'{value}%'},splitLine:{lineStyle:{color:'#2a3260'}}},
+      yAxis:{type:'category',data:names,axisLabel:{...axisLabel(),width:100,overflow:'truncate'}},
+      series:[{type:'bar',data:pcts,itemStyle:{color,borderRadius:[0,6,6,0]},
+        label:{show:true,position:'right',color:'#fff',formatter:p=>p.value+'%'}}]
+    });
+    segChart[id]=chart;
+  };
+  render('crash', s['崩溃场景'], '#ff6b7a', '💥 崩溃场景', '崩溃场景_n');
+  render('load',  s['加载场景'], '#ffb454', '⏳ 加载场景', '加载场景_n');
+  render('lag',   s['卡顿场景'], '#7c9cff', '🐌 卡顿场景', '卡顿场景_n');
+}
+document.querySelectorAll('#tabs-seg .tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('#tabs-seg .tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    renderSeg(t.dataset.seg);
+  });
+});
+renderSeg('一直在玩');
+
+// ========== 洞察文本 ==========
+// 目的1
+const insight1 = [];
+const q2aw = DATA.purpose1['Q2_64位感知率'].find(x=>x.label==='看到了');
+const q2un = DATA.purpose1['Q2_64位感知率'].find(x=>x.label==='没太注意');
+insight1.push(`<li><b>感知率仅 ${q2aw.pct}%</b>（${q2aw.count} / ${DATA.meta['样本总数']}），${q2un.pct}% 玩家"没太注意"升级 — 说明 <b>64位升级的运营曝光不足，宣传链路有优化空间</b>。</li>`);
+const q3a = DATA.purpose1['Q3_体验评价'].find(x=>x.label==='体验有好转');
+const q3b = DATA.purpose1['Q3_体验评价'].find(x=>x.label==='没什么感觉');
+const q3c = DATA.purpose1['Q3_体验评价'].find(x=>x.label==='体验更差了');
+insight1.push(`<li>体验评价为：<span class="badge good">有好转 ${q3a.pct}%</span> <span class="badge neu">没感觉 ${q3b.pct}%</span> <span class="badge bad">更差 ${q3c.pct}%</span> — <b>净正面 = ${(q3a.pct-q3c.pct).toFixed(1)}%</b>，升级整体方向正确，但有 <b>${q3c.pct}%（${q3c.count}人）</b>出现反向劣化，需警惕。</li>`);
+const q4top = DATA.purpose1['Q4_好转点'].filter(x=>x.label!=='其他')[0];
+const q4second = DATA.purpose1['Q4_好转点'].filter(x=>x.label!=='其他')[1];
+insight1.push(`<li>好转点 TOP2：<b>${q4top.label}（${q4top.pct}%）</b>、<b>${q4second.label}（${q4second.pct}%）</b> — 升级带来的正面感受集中在<b>稳定性和流畅度</b>，与内存升级技术预期一致。</li>`);
+const q5top = DATA.purpose1['Q5_恶化点'].filter(x=>x.label!=='其他')[0];
+const q5second = DATA.purpose1['Q5_恶化点'].filter(x=>x.label!=='其他')[1];
+insight1.push(`<li>恶化点 TOP2：<b>${q5top.label}（${q5top.pct}%）</b>、<b>${q5second.label}（${q5second.pct}%）</b> — 说明 <b>少量机型/场景下 64位反而加剧卡顿与崩溃</b>，需优先定位兼容性问题。</li>`);
+// Q2xQ3 交叉
+const seeRate = DATA.purpose1['感知_x_体验评价']['看到了'];
+const notSee  = DATA.purpose1['感知_x_体验评价']['没太注意'];
+const seePos = seeRate.dist.find(x=>x.label==='体验有好转').pct;
+const notSeePos = notSee.dist.find(x=>x.label==='体验有好转').pct;
+insight1.push(`<li><b>感知升级的玩家正面评价率更高</b>：看到了 ${seePos}% vs 没太注意 ${notSeePos}% — 认知会放大正面感受，反向说明<b>运营宣传会直接提升用户体验主观评价</b>。</li>`);
+document.getElementById('insight-1').innerHTML = insight1.join('');
+
+// 目的2
+const insight2 = [];
+const q6 = DATA.purpose2['Q6_核心痛点_总体'].filter(x=>x.label!=='其他');
+insight2.push(`<li>剩余痛点 TOP4 高度集中且差距微小：<b>${q6[0].label}(${q6[0].pct}%)、${q6[1].label}(${q6[1].pct}%)、${q6[2].label}(${q6[2].pct}%)、${q6[3].label}(${q6[3].pct}%)</b>——四者占比都在 30%以上，是<b>必须并行优化的四个主方向</b>。</li>`);
+const ps = q6.find(x=>x.label.includes('穿模'));
+if(ps) insight2.push(`<li>⚠️ <b>角色穿模问题（${ps.pct}%）排名第三</b>，已与卡顿、崩溃同级，<b>容易被技术侧忽视，但玩家感知强</b>——建议把美术/表现问题纳入本轮优化清单。</li>`);
+const q7top = DATA.purpose2['Q7_崩溃场景'].filter(x=>x.label!=='都挺好，没感觉'&&x.label!=='其他');
+insight2.push(`<li>💥 崩溃高发场景：<b>${q7top[0].label}(${q7top[0].pct}%)、${q7top[1].label}(${q7top[1].pct}%)、${q7top[2].label}(${q7top[2].pct}%)</b> — 房间内/游戏中/多开是三大重灾区，<b>多开场景崩溃率高达 36.6%</b>，说明 64位多实例内存管理仍需加固。</li>`);
+const q8top = DATA.purpose2['Q8_加载场景'].filter(x=>x.label!=='都挺好，没感觉'&&x.label!=='其他');
+insight2.push(`<li>⏳ 加载痛点"一枝独秀"：<b>${q8top[0].label} ${q8top[0].pct}%</b>，远高于其他场景（次位仅 ${q8top[1].pct}%）——<b>登录流程是加载优化的最高优先级</b>，直接影响开局第一印象。</li>`);
+const q9top = DATA.purpose2['Q9_卡顿场景'].filter(x=>x.label!=='都挺好，没感觉'&&x.label!=='其他');
+insight2.push(`<li>🐌 卡顿场景相对均衡，TOP3 集中在<b>${q9top[0].label}、${q9top[1].label}、${q9top[2].label}</b>——核心玩法战斗（游戏中/房间内）仍是帧率优化的主战场。</li>`);
+document.getElementById('insight-2').innerHTML = insight2.join('');
+
+// 分层
+const insight3 = [];
+const seg = DATA.segments.by_activity_Q1;
+// 找"不怎么玩了"vs"一直在玩"
+const active = seg['一直在玩'];
+const lost = seg['之前玩过，现在不怎么玩了'];
+const back = seg['之前玩过，最近刚回来玩'];
+if(active && lost){
+  const activeBad = active['Q3_体验评价'].find(x=>x.label==='体验更差了').pct;
+  const lostBad = lost['Q3_体验评价'].find(x=>x.label==='体验更差了').pct;
+  const activeGood = active['Q3_体验评价'].find(x=>x.label==='体验有好转').pct;
+  const lostGood = lost['Q3_体验评价'].find(x=>x.label==='体验有好转').pct;
+  insight3.push(`<li>🎯 <b>核心活跃用户（一直在玩 n=${active.n}）感受最分化</b>：正面 ${activeGood}%，但负面也有 ${activeBad}%（高于回流的 ${back['Q3_体验评价'].find(x=>x.label==='体验更差了').pct}%）— 他们玩得多、遇到问题概率也高，<b>是优化收益最直接的人群</b>。</li>`);
+  insight3.push(`<li>😴 <b>流失候选（不怎么玩了 n=${lost.n}）正面感受最低（${lostGood}%）、"没感觉"高达 ${lost['Q3_体验评价'].find(x=>x.label==='没什么感觉').pct}%</b> — 对他们来说<b>单纯技术升级不足以召回，需要内容+体验组合拳</b>。</li>`);
+}
+// 体验更差群体的痛点结构
+const worst = DATA.segments.by_experience_Q3['体验更差了'];
+if(worst){
+  const top3 = worst['Q6_核心痛点'].filter(x=>x.label!=='其他'&&x.label!=='都挺好，没感觉').slice(0,3);
+  insight3.push(`<li>🔥 <b>"体验更差"玩家（${worst.n}人）的痛点远超全量均值</b>：${top3.map(x=>`<b>${x.label} ${x.pct}%</b>`).join('、')} — 这个群体是<b>投诉和流失的主要来源，需要独立建立问题跟踪清单</b>。</li>`);
+}
+// 回流用户
+if(back){
+  const backLag = back['卡顿场景'] && back['卡顿场景'][0];
+  insight3.push(`<li>♻️ <b>回流用户（${back.n}人）正面率 ${back['Q3_体验评价'].find(x=>x.label==='体验有好转').pct}%</b>，仅次于活跃用户，64位升级对回流承接是<b>正向资产</b>，但仍需关注其进入游戏后的首屏体验（登录加载）。</li>`);
+}
+document.getElementById('insight-3').innerHTML = insight3.join('');
+
+// ========== 行动建议表 ==========
+const actions = [
+  {p:'P0',topic:'登录加载优化', ev:'加载痛点中"登录游戏"占 67.5%，远超其他场景；占总体样本 20.7%', act:'登录流程资源预热 + 分阶段加载 + 进度可视化；目标：登录平均耗时下降 ≥30%'},
+  {p:'P0',topic:'房间内/游戏中稳定性', ev:'崩溃场景 TOP1 房间内 44%、TOP2 游戏中 41%；卡顿 TOP1 游戏中 47%、TOP2 房间内 42%', act:'联合 QA 对房间/战斗场景做专项 Crash Top 治理 + 帧率优化；建立白金用户机型跟踪'},
+  {p:'P0',topic:'多开场景稳定性', ev:'崩溃场景"客户端多开"占 36.6%、卡顿"客户端多开"占 37.7%', act:'64位多实例内存管理加固；或在多开提示文案中明确"可能影响稳定"，管理预期'},
+  {p:'P1',topic:'角色穿模表现', ev:'Q6 核心痛点第3位，33.85% 玩家勾选', act:'美术 + 程序联合排查穿模 Top 套装/动作；纳入 X51 版本补丁修复清单'},
+  {p:'P1',topic:'"体验更差"群体兜底', ev:'699 人（14.5%）出现反向劣化；67.5% 表现为卡顿更严重、43.5% 直接无法登录', act:'开白名单回收机型与设备信息；提供"一键回滚32位"临时通道或机型适配补丁'},
+  {p:'P1',topic:'64位升级感知强化', ev:'感知率仅 62.8%；感知人群正面率显著更高', act:'游戏内推送升级收益卡（TOP1=崩溃下降、TOP2=更流畅）；版本资讯/公众号同步扩散'},
+  {p:'P2',topic:'流失候选召回', ev:'"不怎么玩了"人群 n=784，正面率仅 13.3%、"没感觉" 74.1%', act:'在召回活动中，性能升级不作主卖点，以"新内容+性能双升级"组合沟通'},
+  {p:'P2',topic:'长尾痛点跟踪', ev:'网络延迟 18%、界面交互 14%；非头部但稳定存在', act:'纳入日常用户反馈监控，设阈值触发专项'},
+];
+const tbody = document.getElementById('tbl-action');
+const pClass = p => p==='P0'?'hi':(p==='P1'?'ok':'');
+tbody.innerHTML = actions.map(a=>`
+  <tr>
+    <td class="${pClass(a.p)}">${a.p}</td>
+    <td><b>${a.topic}</b></td>
+    <td style="color:#cfd6ff">${a.ev}</td>
+    <td style="color:#dfe5ff">${a.act}</td>
+  </tr>
+`).join('');
+</script>
 </body>
 </html>
